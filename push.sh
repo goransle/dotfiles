@@ -1,6 +1,6 @@
-cp -R ~/.config/nvim ./nvim;
-cp ~/.zshrc ./zshrc;
-cp -R ~/.vim ./vim;
+cp -R ~/.config/nvim ./;
+cp ~/.zshrc ./;
+cp -R ~/.vim ./;
 git add *;
 git commit -m "Pushed `date`";
 git push origin master;
