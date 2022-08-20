@@ -22,6 +22,9 @@ async function addFile(path: string) {
 
 if (args.includes('push')) {
     await Promise.all(toSync.map(path => addFile(path)));
+    const status = run({ cmd: ['git', 'status'] });
+    await status.status();
+
     const commit = run({ cmd: ['git', 'commit', '-m', 'Update ' + (new Date).toISOString()] });
 
     await commit.status();
