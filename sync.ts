@@ -28,6 +28,8 @@ if (args.includes('push')) {
     const commit = run({ cmd: ['git', 'commit', '-m', 'Update ' + (new Date).toISOString()] });
 
     await commit.status();
+    const push = run({ cmd: ['git', 'push'] });
+    await push.status();
 }
 
 if (args.includes('pull')) {
