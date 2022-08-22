@@ -5,5 +5,6 @@ https://github.com/highcharts ~3
 https://app.asana.com/ ~3
 Google Kalender
 Highsoft epost
+Tidsbanken
 
 !$ defaultbrowser firefox &> /dev/null && ~/bunches/confirm-dialog &> /dev/null
