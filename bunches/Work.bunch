@@ -1,8 +1,9 @@
 $ defaultbrowser chrome &> /dev/null && ~/bunches/confirm-dialog &> /dev/null
 
+chrome[highsoft]:https://github.com/highcharts
+chrome[highsoft]:https://app.asana.com/
+
 Slack
-https://github.com/highcharts ~3
-https://app.asana.com/ ~3
 Google Kalender
 Highsoft epost
 Tidsbanken
