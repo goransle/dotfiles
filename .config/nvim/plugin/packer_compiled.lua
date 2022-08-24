@@ -69,10 +69,30 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  everblush = {
+    loaded = true,
+    path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/everblush",
+    url = "https://github.com/Everblush/everblush.nvim"
+  },
   firenvim = {
     loaded = true,
     path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/firenvim",
     url = "https://github.com/glacambre/firenvim"
+  },
+  ["nvim-comment"] = {
+    loaded = true,
+    path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/nvim-comment",
+    url = "https://github.com/terrortylor/nvim-comment"
+  },
+  ["nvim-markdown-preview"] = {
+    loaded = true,
+    path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/nvim-markdown-preview",
+    url = "https://github.com/davidgranstrom/nvim-markdown-preview"
+  },
+  ["nvim-web-devicons"] = {
+    loaded = true,
+    path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+    url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = true,

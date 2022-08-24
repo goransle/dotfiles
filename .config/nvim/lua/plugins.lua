@@ -11,6 +11,17 @@ return require('packer').startup(function(use)
 	use 'rstacruz/vim-closer'
 	use 'toppair/reach.nvim'
 
+	use {"davidgranstrom/nvim-markdown-preview"}
+
+
+	use { 'Everblush/everblush.nvim', as = 'everblush' }
+
+	use {'kyazdani42/nvim-web-devicons'}
+
+	use 'terrortylor/nvim-comment'
+	require('nvim_comment').setup()
+
+
 	use {
 		'glacambre/firenvim',
 		run = function() vim.fn['firenvim#install'](0) end 
