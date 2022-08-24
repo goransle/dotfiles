@@ -69,6 +69,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  chadtree = {
+    loaded = true,
+    path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/chadtree",
+    url = "https://github.com/ms-jpq/chadtree"
+  },
   everblush = {
     loaded = true,
     path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/everblush",

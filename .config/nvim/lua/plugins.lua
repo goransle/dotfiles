@@ -18,6 +18,10 @@ return require('packer').startup(function(use)
 
 	use {'kyazdani42/nvim-web-devicons'}
 
+	use {'ms-jpq/chadtree', run = 'python3 -m chadtree deps' }
+
+	use 'ms-jpq/coq_nvim'
+
 	use 'terrortylor/nvim-comment'
 	require('nvim_comment').setup()
 
