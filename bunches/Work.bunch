@@ -3,6 +3,7 @@ $ defaultbrowser chrome &> /dev/null && ~/bunches/confirm-dialog &> /dev/null
 chrome:https://github.com/highcharts
 chrome:https://app.asana.com/
 
+Amethyst
 Slack
 Google Kalender
 Highsoft epost

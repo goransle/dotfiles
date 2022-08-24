@@ -74,6 +74,11 @@ _G.packer_plugins = {
     path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/chadtree",
     url = "https://github.com/ms-jpq/chadtree"
   },
+  coq_nvim = {
+    loaded = true,
+    path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/coq_nvim",
+    url = "https://github.com/ms-jpq/coq_nvim"
+  },
   everblush = {
     loaded = true,
     path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/everblush",
