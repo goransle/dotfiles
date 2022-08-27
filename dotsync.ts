@@ -13,30 +13,30 @@ const toSync = files;
 const __dirname = dirname(fromFileUrl(import.meta.url));
 
 async function addFile(path: string) {
-    await copy(join(home, path), join(__dirname, path), { overwrite: true });
+  await copy(join(home, path), join(__dirname, path), { overwrite: true });
 
-    const command = run({ cmd: ['git', 'add', join(__dirname, path)], cwd: __dirname })
-    await command.status();
+  const command = run({ cmd: ['git', 'add', join(__dirname, path)], cwd: __dirname })
+  await command.status();
 }
 
 
 if (args.includes('push')) {
-    await Promise.all(toSync.map(path => addFile(path)));
-    const status = run({ cmd: ['git', 'status'], cwd: __dirname });
-    await status.status();
+  await Promise.all(toSync.map(path => addFile(path)));
+  const status = run({ cmd: ['git', 'status'], cwd: __dirname });
+  await status.status();
 
-    const commit = run({ cmd: ['git', 'commit', '-m', 'Update ' + (new Date).toISOString()], cwd: __dirname });
+  const commit = run({ cmd: ['git', 'commit', '-m', 'Update ' + (new Date).toISOString()], cwd: __dirname });
 
-    await commit.status();
-    const push = run({ cmd: ['git', 'push'], cwd: __dirname });
-    await push.status();
+  await commit.status();
+  const push = run({ cmd: ['git', 'push'], cwd: __dirname });
+  await push.status();
 }
 
 if (args.includes('pull')) {
-    const pull = run({ cmd: ['git', 'push'], cwd: __dirname });
-    await pull.status();
+  const pull = run({ cmd: ['git', 'push'], cwd: __dirname });
+  await pull.status();
 
-    await Promise.all(toSync.map(path => {
-        return copy(join(__dirname, path), join(home, path), { overwrite: true })
-    }));
+  await Promise.all(toSync.map(path => {
+    return copy(join(__dirname, path), join(home, path), { overwrite: true })
+  }));
 }
