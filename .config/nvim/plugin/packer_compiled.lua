@@ -70,6 +70,7 @@ time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   chadtree = {
+    config = { "\27LJ\2\no\0\0\a\0\t\0\f6\0\0\0'\2\1\0B\0\2\0026\1\2\0009\1\3\0019\1\4\1'\3\5\0'\4\6\0009\5\a\0005\6\b\0B\1\5\1K\0\1\0\1\0\1\fnoremap\2\tOpen\t<F5>\6n\bset\vkeymap\bvim\rchadtree\frequire\0" },
     loaded = true,
     path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/chadtree",
     url = "https://github.com/ms-jpq/chadtree"
@@ -88,6 +89,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/firenvim",
     url = "https://github.com/glacambre/firenvim"
+  },
+  ["galaxyline.nvim"] = {
+    config = { "\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30galaxyline.themes.eviline\frequire\0" },
+    loaded = true,
+    path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/galaxyline.nvim",
+    url = "https://github.com/NTBBloodbath/galaxyline.nvim"
+  },
+  lspconfig = {
+    loaded = true,
+    path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/lspconfig",
+    url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-comment"] = {
     loaded = true,
@@ -110,18 +122,41 @@ _G.packer_plugins = {
     url = "https://github.com/wbthomason/packer.nvim"
   },
   ["reach.nvim"] = {
+    config = { "\27LJ\2\nØ\1\0\0\n\0\14\1\0256\0\0\0'\2\1\0B\0\2\0029\1\2\0005\3\3\0006\4\4\0009\4\5\0049\4\6\4'\6\a\0'\a\b\0009\b\t\0005\t\n\0B\4\5\2>\4\1\0036\4\4\0009\4\5\0049\4\6\4'\6\a\0'\a\v\0009\b\f\0005\t\r\0B\4\5\0?\4\0\0B\1\2\1K\0\1\0\1\0\1\fnoremap\2\nmarks\t<F3>\1\0\1\fnoremap\2\fbuffers\t<F2>\6n\bset\vkeymap\bvim\1\0\1\18notifications\2\nsetup\nreach\frequire\5€€À™\4\0" },
     loaded = true,
     path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/reach.nvim",
     url = "https://github.com/toppair/reach.nvim"
   },
-  ["vim-closer"] = {
+  ["trouble.nvim"] = {
+    config = { "\27LJ\2\nŒ\1\0\0\n\0\n\1\0166\0\0\0'\2\1\0B\0\2\0029\1\2\0004\3\3\0006\4\3\0009\4\4\0049\4\5\4'\6\6\0'\a\a\0009\b\b\0005\t\t\0B\4\5\0?\4\0\0B\1\2\1K\0\1\0\1\0\1\fnoremap\2\vtoggle\t<F4>\6n\bset\vkeymap\bvim\nsetup\ftrouble\frequire\3€€À™\4\0" },
     loaded = true,
-    path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/vim-closer",
-    url = "https://github.com/rstacruz/vim-closer"
+    path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/trouble.nvim",
+    url = "https://github.com/folke/trouble.nvim"
+  },
+  ["vim-obsession"] = {
+    loaded = true,
+    path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/vim-obsession",
+    url = "https://github.com/tpope/vim-obsession"
   }
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: galaxyline.nvim
+time([[Config for galaxyline.nvim]], true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30galaxyline.themes.eviline\frequire\0", "config", "galaxyline.nvim")
+time([[Config for galaxyline.nvim]], false)
+-- Config for: trouble.nvim
+time([[Config for trouble.nvim]], true)
+try_loadstring("\27LJ\2\nŒ\1\0\0\n\0\n\1\0166\0\0\0'\2\1\0B\0\2\0029\1\2\0004\3\3\0006\4\3\0009\4\4\0049\4\5\4'\6\6\0'\a\a\0009\b\b\0005\t\t\0B\4\5\0?\4\0\0B\1\2\1K\0\1\0\1\0\1\fnoremap\2\vtoggle\t<F4>\6n\bset\vkeymap\bvim\nsetup\ftrouble\frequire\3€€À™\4\0", "config", "trouble.nvim")
+time([[Config for trouble.nvim]], false)
+-- Config for: chadtree
+time([[Config for chadtree]], true)
+try_loadstring("\27LJ\2\no\0\0\a\0\t\0\f6\0\0\0'\2\1\0B\0\2\0026\1\2\0009\1\3\0019\1\4\1'\3\5\0'\4\6\0009\5\a\0005\6\b\0B\1\5\1K\0\1\0\1\0\1\fnoremap\2\tOpen\t<F5>\6n\bset\vkeymap\bvim\rchadtree\frequire\0", "config", "chadtree")
+time([[Config for chadtree]], false)
+-- Config for: reach.nvim
+time([[Config for reach.nvim]], true)
+try_loadstring("\27LJ\2\nØ\1\0\0\n\0\14\1\0256\0\0\0'\2\1\0B\0\2\0029\1\2\0005\3\3\0006\4\4\0009\4\5\0049\4\6\4'\6\a\0'\a\b\0009\b\t\0005\t\n\0B\4\5\2>\4\1\0036\4\4\0009\4\5\0049\4\6\4'\6\a\0'\a\v\0009\b\f\0005\t\r\0B\4\5\0?\4\0\0B\1\2\1K\0\1\0\1\0\1\fnoremap\2\nmarks\t<F3>\1\0\1\fnoremap\2\fbuffers\t<F2>\6n\bset\vkeymap\bvim\1\0\1\18notifications\2\nsetup\nreach\frequire\5€€À™\4\0", "config", "reach.nvim")
+time([[Config for reach.nvim]], false)
 if should_profile then save_profiles() end
 
 end)
