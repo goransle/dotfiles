@@ -101,6 +101,10 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
+fpath=(~/.zsh $fpath)
+autoload -Uz compinit
+compinit -u
+
 export DENO_INSTALL="/Users/goranslettemark/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
