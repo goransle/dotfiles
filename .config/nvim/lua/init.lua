@@ -37,7 +37,6 @@ end
 local lsp = require "lspconfig"
 local coq = require "coq" 
 
-
 lsp.pyright.setup({})
 lsp.tsserver.setup(coq.lsp_ensure_capabilities({
 	on_attach = on_attach

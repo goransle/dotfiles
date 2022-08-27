@@ -21,6 +21,22 @@ return require('packer').startup(function(use)
     end
   } 
 
+  use 'nvim-lua/plenary.nvim'
+  use {
+  'nvim-telescope/telescope.nvim', 
+  tag = '0.1.0',
+  requires = { {'nvim-lua/plenary.nvim'} },
+  config = function()
+    telescope = require('telescope');
+    telescope.setup()
+    vim.keymap.set('n', 'ff', require('telescope.builtin').find_files, {noremap = true} );
+    vim.keymap.set('n', 'fb', require('telescope.builtin').current_buffer_fuzzy_find, {noremap = true} );
+    vim.keymap.set('n', 'fg', require('telescope.builtin').live_grep, {noremap = true} );
+    vim.keymap.set('n', 'fs', require('telescope.builtin').grep_string, {noremap = true} );
+    vim.keymap.set('n', 'fr', require('telescope.builtin').resume, {noremap = true} );
+  end
+}
+
 	use {"davidgranstrom/nvim-markdown-preview"}
 
 	use({
