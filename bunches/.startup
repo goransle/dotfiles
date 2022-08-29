@@ -1,1 +1,1 @@
-$ defaultbrowser firefox &> /dev/null && ~/bunches/confirm-dialog &> /dev/null
+$ defaultbrowser firefox &> /dev/null && ~/bunches/confirm-dialog &> /dev/null && exit 0
