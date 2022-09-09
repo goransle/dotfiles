@@ -1,6 +1,6 @@
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
+local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
@@ -14,7 +14,7 @@ local on_attach = function(client, bufnr)
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -44,7 +44,7 @@ vim.g.markdown_fenced_languages = {
 
 lsp.tsserver.setup(coq.lsp_ensure_capabilities({
   on_attach = on_attach,
-  root_dir = lsp.util.root_pattern('package.json')
+  root_dir = lsp.util.root_pattern('package.json', 'tsconfig.json')
 }))
 
 lsp.denols.setup(coq.lsp_ensure_capabilities({
@@ -52,7 +52,7 @@ lsp.denols.setup(coq.lsp_ensure_capabilities({
   root_dir = lsp.util.root_pattern('deno.json')
 }))
 
-lsp.sumneko_lua.setup( coq.lsp_ensure_capabilities({
+lsp.sumneko_lua.setup(coq.lsp_ensure_capabilities({
   on_attach = on_attach,
   settings = {
     Lua = {
@@ -62,7 +62,7 @@ lsp.sumneko_lua.setup( coq.lsp_ensure_capabilities({
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
+        globals = { 'vim' },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
@@ -83,8 +83,40 @@ lsp.pyright.setup({
 
 lsp.intelephense.setup({
   on_attach = on_attach,
-  root_dir = lsp.util.root_pattern('index.php')
+  filetypes = { 'php' };
+  root_dir = function(fname)
+    return vim.loop.cwd()
+  end;
+  settings = {
+    intelephense = {
+      files = {
+        maxSize = 1000000;
+      };
+      environment = {
+        includePaths = {
+          "~/DevKinsta/public/woo-local"
+        }
+      },
+      format = {
+        braces = 'k&r'
+      }
+    }
+  }
 })
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-
+lsp.emmet_ls.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
+  init_options = {
+    html = {
+      options = {
+        -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+        ["bem.enabled"] = true,
+      },
+    },
+  }
+})

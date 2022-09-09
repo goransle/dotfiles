@@ -1,0 +1,10 @@
+snippet wclogger
+alias wclog
+   \$logger = wc_get_logger();
+   \$log_context = ['source' => '${0}'];
+
+
+snippet logjson
+alias logsjon
+   \$logger -> debug(json_encode(${0}), $log_context);
+
