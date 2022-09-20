@@ -6,7 +6,7 @@ Google Chrome
 
 Amethyst
 Slack
-Highsoft epost
 Tidsbanken
+Mail
 
 !$ (defaultbrowser firefox &> /dev/null && ~/bunches/confirm-dialog &> /dev/null) || exit 0 
