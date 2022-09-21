@@ -34,6 +34,7 @@ local on_attach = function(client, bufnr)
 end
 
 
+vim.wo.relativenumber = true;
 
 local lsp = require "lspconfig"
 local coq = require "coq"
