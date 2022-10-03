@@ -17,4 +17,4 @@ augroup packer_user_config
 augroup end
 
 :COQnow -s
-
+:tnoremap <Esc><Esc> <C-\><C-n>

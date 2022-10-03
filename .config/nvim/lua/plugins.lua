@@ -21,6 +21,14 @@ return require('packer').startup(function(use)
     end
   }
 
+  use { "akinsho/toggleterm.nvim", tag = '*', config = function()
+    require("toggleterm").setup({
+      open_mapping = [[<F6>]],
+      direction = 'vertical',
+      size = 80
+    })
+  end }
+
   use 'nvim-lua/plenary.nvim'
 
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = ' arch -arm64 -target arm64-apple-macos11 make' }
