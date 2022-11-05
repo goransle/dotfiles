@@ -18,3 +18,4 @@ augroup end
 
 :COQnow -s
 :tnoremap <Esc><Esc> <C-\><C-n>
+:tnoremap <C-'> <C-\><C-n>

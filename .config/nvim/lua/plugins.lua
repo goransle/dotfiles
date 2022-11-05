@@ -23,7 +23,7 @@ return require('packer').startup(function(use)
 
   use { "akinsho/toggleterm.nvim", tag = '*', config = function()
     require("toggleterm").setup({
-      open_mapping = [[<F6>]],
+      open_mapping = [[<C-'>]],
       direction = 'vertical',
       size = 80
     })
@@ -105,6 +105,8 @@ return require('packer').startup(function(use)
       map('n', '<space>hu', gs.undo_stage_hunk)
       map('n', '<space>hR', gs.reset_buffer)
       map('n', '<space>hp', gs.preview_hunk)
+      map('n', '<space>hn', gs.next_hunk)
+      map('n', '<space>hN', gs.prev_hunk)
       map('n', '<space>hb', function() gs.blame_line { full = true } end)
       map('n', '<space>tb', gs.toggle_current_line_blame)
       map('n', '<space>hd', gs.diffthis)
