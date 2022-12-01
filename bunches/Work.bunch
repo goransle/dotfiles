@@ -1,12 +1,10 @@
 $ (defaultbrowser chrome &> /dev/null && ~/bunches/confirm-dialog &> /dev/null) || exit 0
 
 Google Chrome
-- https://github.com/highcharts
-- https://app.asana.com
 
 Amethyst
-Slack
 Tidsbanken
-Mail
+
+Work-comms.bunch
 
 !$ (defaultbrowser firefox &> /dev/null && ~/bunches/confirm-dialog &> /dev/null) || exit 0 

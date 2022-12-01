@@ -153,6 +153,40 @@ return require('packer').startup(function(use)
     end
   }
 
+  use({
+    "jose-elias-alvarez/null-ls.nvim",
+    config = function()
+      require("null-ls").setup()
+    end,
+    requires = { "nvim-lua/plenary.nvim" },
+  })
+
+  use {
+    'MunifTanjim/eslint.nvim',
+    as = 'eslint',
+    config = function()
+      require('eslint').setup({
+        bin = 'eslint', -- or `eslint_d`
+        code_actions = {
+          enable = true,
+          apply_on_save = {
+            enable = true,
+            types = { "directive", "problem", "suggestion", "layout" },
+          },
+          disable_rule_comment = {
+            enable = true,
+            location = "separate_line", -- or `same_line`
+          },
+        },
+        diagnostics = {
+          enable = true,
+          report_unused_disable_directives = false,
+          run_on = "type", -- or `save`
+        },
+
+      })
+    end
+  }
 
   use { 'neovim/nvim-lspconfig', as = 'lspconfig' }
   use 'ms-jpq/coq_nvim'
