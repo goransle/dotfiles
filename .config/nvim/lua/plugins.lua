@@ -185,7 +185,8 @@ return require('packer').startup(function(use)
         },
 
       })
-    end
+    end,
+    requires = { "jose-elias-alvarez/null-ls.nvim" }
   }
 
   use { 'neovim/nvim-lspconfig', as = 'lspconfig' }
