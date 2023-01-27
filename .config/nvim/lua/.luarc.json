@@ -1,0 +1,31 @@
+{
+    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+    "Lua.workspace.library": [
+        "/Users/goranslettemark/.config/nvim",
+        "/Users/goranslettemark/.local/share/nvim/site",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/chadtree",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/coq_nvim",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/eslint",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/everblush",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/firenvim",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/galaxyline.nvim",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/lspconfig",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/nvim-comment",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/nvim-markdown-preview",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/nvim-neoclip.lua",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/packer.nvim",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/reach.nvim",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/trouble.nvim",
+        "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/vim-obsession",
+        "/opt/homebrew/Cellar/neovim/0.8.1/share/nvim/runtime",
+        "/opt/homebrew/Cellar/neovim/0.8.1/lib/nvim",
+        "${3rd}/luassert/library"
+    ]
+}
