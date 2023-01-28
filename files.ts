@@ -8,4 +8,5 @@ export const files = [
     '.config/nvim',
     '.config/fish',
     '.zshrc',
+    '.nvmrc'
 ].concat(system.platform() === 'darwin' ? macOnly : [])
