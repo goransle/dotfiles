@@ -82,11 +82,6 @@ lsp.pyright.setup({
   on_attach = on_attach
 })
 
-
-lsp['null-ls'].setup({
-  on_attach = on_attach
-})
-
 lsp.intelephense.setup({
   on_attach = on_attach,
   filetypes = { 'php' };
