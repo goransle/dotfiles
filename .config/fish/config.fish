@@ -3,5 +3,4 @@ if status is-interactive
     set -gx PATH $PATH ~/usr/bin # default path I guess
     
     fish_add_path "/opt/homebrew/bin"
-    fish_add_path "/Users/goranslettemark/.deno/bin"
 end
