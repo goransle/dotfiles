@@ -15,6 +15,14 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
+  -- formatter function. Skip tsserver to use null-ls
+  local format = function()
+    vim.lsp.buf.format({
+      filter = function(client) return client.name ~= "tsserver" end
+    })
+  end
+
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -30,7 +38,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
+  vim.keymap.set('n', '<space>f', format, bufopts)
 end
 
 
@@ -103,6 +111,10 @@ lsp.intelephense.setup({
       }
     }
   }
+})
+
+lsp.svelte.setup({
+  on_attach = on_attach
 })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

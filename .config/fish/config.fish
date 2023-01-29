@@ -1,6 +1,5 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
-    set -gx PATH $PATH ~/usr/bin # default path I guess
     fish_add_path "/opt/homebrew/bin"
     fish_config prompt choose Arrow
     fish_config theme choose "Solarized Light"
