@@ -86,7 +86,7 @@ _G.packer_plugins = {
     url = "https://github.com/ms-jpq/coq_nvim"
   },
   eslint = {
-    config = { "\27LJ\2\nË\2\0\0\6\0\14\0\0176\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0005\4\5\0005\5\6\0=\5\a\4=\4\b\0035\4\t\0=\4\n\3=\3\v\0025\3\f\0=\3\r\2B\0\2\1K\0\1\0\16diagnostics\1\0\3\venable\2\vrun_on\ttype%report_unused_disable_directives\1\17code_actions\25disable_rule_comment\1\0\2\rlocation\18separate_line\venable\2\18apply_on_save\ntypes\1\5\0\0\14directive\fproblem\15suggestion\vlayout\1\0\1\venable\2\1\0\1\venable\2\1\0\1\bbin\reslint_d\nsetup\veslint\frequire\0" },
+    config = { "\27LJ\2\nè\2\0\0\6\0\14\0\0176\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0005\4\5\0005\5\6\0=\5\a\4=\4\b\0035\4\t\0=\4\n\3=\3\v\0025\3\f\0=\3\r\2B\0\2\1K\0\1\0\16diagnostics\1\0\3%report_unused_disable_directives\1\venable\2\vrun_on\ttype\17code_actions\25disable_rule_comment\1\0\2\venable\2\rlocation\18separate_line\18apply_on_save\ntypes\1\5\0\0\14directive\fproblem\15suggestion\vlayout\1\0\1\venable\2\1\0\1\venable\2\1\0\2\bbin\reslint_d\bcmd\29eslint_d -f visualstudio\nsetup\veslint\frequire\0" },
     loaded = true,
     path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/eslint",
     url = "https://github.com/MunifTanjim/eslint.nvim"
@@ -95,11 +95,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/everblush",
     url = "https://github.com/Everblush/everblush.nvim"
-  },
-  firenvim = {
-    loaded = true,
-    path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/firenvim",
-    url = "https://github.com/glacambre/firenvim"
   },
   ["galaxyline.nvim"] = {
     config = { "\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30galaxyline.themes.eviline\frequire\0" },
@@ -117,6 +112,18 @@ _G.packer_plugins = {
     path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
+  ["mason-lspconfig.nvim"] = {
+    config = { "\27LJ\2\nŠ\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\21ensure_installed\1\0\0\1\5\0\0\16sumneko_lua\rtsserver\17intelephense\veslint\nsetup\20mason-lspconfig\frequire\0" },
+    loaded = true,
+    path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+    url = "https://github.com/williamboman/mason-lspconfig.nvim"
+  },
+  ["mason.nvim"] = {
+    config = { "\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nmason\frequire\0" },
+    loaded = true,
+    path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    url = "https://github.com/williamboman/mason.nvim"
+  },
   ["null-ls.nvim"] = {
     config = { "\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fnull-ls\frequire\0" },
     loaded = true,
@@ -128,16 +135,17 @@ _G.packer_plugins = {
     path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/nvim-comment",
     url = "https://github.com/terrortylor/nvim-comment"
   },
-  ["nvim-markdown-preview"] = {
-    loaded = true,
-    path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/nvim-markdown-preview",
-    url = "https://github.com/davidgranstrom/nvim-markdown-preview"
-  },
   ["nvim-neoclip.lua"] = {
-    config = { "\27LJ\2\n’\1\0\0\a\0\n\0\0146\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0026\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\a\0'\5\b\0005\6\t\0B\1\5\1K\0\1\0\1\0\1\fnoremap\2\27:Telescope neoclip<cr>\r<space>m\6n\bset\vkeymap\bvim\nsetup\fneoclip\frequire\0" },
+    config = { "\27LJ\2\n“\1\0\0\a\0\n\0\0146\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0026\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\a\0'\5\b\0005\6\t\0B\1\5\1K\0\1\0\1\0\1\fnoremap\2\27:Telescope neoclip<cr>\14<leader>m\6n\bset\vkeymap\bvim\nsetup\fneoclip\frequire\0" },
     loaded = true,
     path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/nvim-neoclip.lua",
     url = "https://github.com/AckslD/nvim-neoclip.lua"
+  },
+  ["nvim-treesitter"] = {
+    config = { "\27LJ\2\nê\1\0\0\4\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\1K\0\1\0\14highlight\1\0\2\venable\2&additional_vim_regex_highlighting\1\21ensure_installed\1\0\2\17sync_install\1\17auto_install\2\1\a\0\0\thelp\15javascript\15typescript\6c\blua\bvim\nsetup\28nvim-treesitter.configs\frequire\0" },
+    loaded = true,
+    path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
@@ -166,13 +174,13 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
   },
   ["telescope.nvim"] = {
-    config = { "\27LJ\2\nî\3\0\0\b\0\25\0C6\0\0\0'\2\1\0B\0\2\0029\1\2\0B\1\1\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\a\0006\5\0\0'\a\b\0B\5\2\0029\5\t\0055\6\n\0B\1\5\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\v\0006\5\0\0'\a\b\0B\5\2\0029\5\f\0055\6\r\0B\1\5\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\14\0006\5\0\0'\a\b\0B\5\2\0029\5\15\0055\6\16\0B\1\5\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\17\0006\5\0\0'\a\b\0B\5\2\0029\5\18\0055\6\19\0B\1\5\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\20\0006\5\0\0'\a\b\0B\5\2\0029\5\21\0055\6\22\0B\1\5\0016\1\0\0'\3\1\0B\1\2\0029\1\23\1'\3\24\0B\1\2\1K\0\1\0\bfzf\19load_extension\1\0\1\fnoremap\2\vresume\afr\1\0\1\fnoremap\2\16grep_string\afs\1\0\1\fnoremap\2\14live_grep\afg\1\0\1\fnoremap\2\30current_buffer_fuzzy_find\afb\1\0\1\fnoremap\2\15find_files\22telescope.builtin\aff\6n\bset\vkeymap\bvim\nsetup\14telescope\frequire\0" },
+    config = { "\27LJ\2\n»\4\0\0\b\0\28\0N6\0\0\0'\2\1\0B\0\2\0029\1\2\0B\1\1\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\a\0006\5\0\0'\a\b\0B\5\2\0029\5\t\0055\6\n\0B\1\5\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\v\0006\5\0\0'\a\b\0B\5\2\0029\5\f\0055\6\r\0B\1\5\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\14\0006\5\0\0'\a\b\0B\5\2\0029\5\15\0055\6\16\0B\1\5\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\17\0006\5\0\0'\a\b\0B\5\2\0029\5\18\0055\6\19\0B\1\5\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\20\0006\5\0\0'\a\b\0B\5\2\0029\5\21\0055\6\22\0B\1\5\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\23\0006\5\0\0'\a\b\0B\5\2\0029\5\24\0055\6\25\0B\1\5\0016\1\0\0'\3\1\0B\1\2\0029\1\26\1'\3\27\0B\1\2\1K\0\1\0\bfzf\19load_extension\1\0\1\fnoremap\2\vresume\afr\1\0\1\fnoremap\2\16grep_string\afs\1\0\1\fnoremap\2\14live_grep\afg\1\0\1\fnoremap\2\30current_buffer_fuzzy_find\afb\1\0\1\fnoremap\2\14git_files\15<leader>gf\1\0\1\fnoremap\2\15find_files\22telescope.builtin\aff\6n\bset\vkeymap\bvim\nsetup\14telescope\frequire\0" },
     loaded = true,
     path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["toggleterm.nvim"] = {
-    config = { "\27LJ\2\nl\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\3\14direction\rvertical\tsize\3P\17open_mapping\n<C-'>\nsetup\15toggleterm\frequire\0" },
+    config = { "\27LJ\2\nl\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\3\tsize\3P\14direction\rvertical\17open_mapping\n<C-'>\nsetup\15toggleterm\frequire\0" },
     loaded = true,
     path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
@@ -183,6 +191,18 @@ _G.packer_plugins = {
     path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/trouble.nvim",
     url = "https://github.com/folke/trouble.nvim"
   },
+  undotree = {
+    config = { "\27LJ\2\n]\0\0\5\0\a\0\n6\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0006\4\0\0009\4\5\0049\4\6\4B\0\4\1K\0\1\0\19UndotreeToggle\bcmd\14<leader>u\6n\bset\vkeymap\bvim\0" },
+    loaded = true,
+    path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/undotree",
+    url = "https://github.com/mbbill/undotree"
+  },
+  ["vim-fugitive"] = {
+    config = { "\27LJ\2\nS\0\0\5\0\a\0\n6\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0006\4\0\0009\4\5\0049\4\6\4B\0\4\1K\0\1\0\bGit\bcmd\15<leader>gs\6n\bset\vkeymap\bvim\0" },
+    loaded = true,
+    path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
+  },
   ["vim-obsession"] = {
     loaded = true,
     path = "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/vim-obsession",
@@ -191,30 +211,26 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-try_loadstring("\27LJ\2\nî\3\0\0\b\0\25\0C6\0\0\0'\2\1\0B\0\2\0029\1\2\0B\1\1\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\a\0006\5\0\0'\a\b\0B\5\2\0029\5\t\0055\6\n\0B\1\5\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\v\0006\5\0\0'\a\b\0B\5\2\0029\5\f\0055\6\r\0B\1\5\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\14\0006\5\0\0'\a\b\0B\5\2\0029\5\15\0055\6\16\0B\1\5\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\17\0006\5\0\0'\a\b\0B\5\2\0029\5\18\0055\6\19\0B\1\5\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\20\0006\5\0\0'\a\b\0B\5\2\0029\5\21\0055\6\22\0B\1\5\0016\1\0\0'\3\1\0B\1\2\0029\1\23\1'\3\24\0B\1\2\1K\0\1\0\bfzf\19load_extension\1\0\1\fnoremap\2\vresume\afr\1\0\1\fnoremap\2\16grep_string\afs\1\0\1\fnoremap\2\14live_grep\afg\1\0\1\fnoremap\2\30current_buffer_fuzzy_find\afb\1\0\1\fnoremap\2\15find_files\22telescope.builtin\aff\6n\bset\vkeymap\bvim\nsetup\14telescope\frequire\0", "config", "telescope.nvim")
-time([[Config for telescope.nvim]], false)
--- Config for: toggleterm.nvim
-time([[Config for toggleterm.nvim]], true)
-try_loadstring("\27LJ\2\nl\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\3\14direction\rvertical\tsize\3P\17open_mapping\n<C-'>\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
-time([[Config for toggleterm.nvim]], false)
--- Config for: chadtree
-time([[Config for chadtree]], true)
-try_loadstring("\27LJ\2\no\0\0\a\0\t\0\f6\0\0\0'\2\1\0B\0\2\0026\1\2\0009\1\3\0019\1\4\1'\3\5\0'\4\6\0009\5\a\0005\6\b\0B\1\5\1K\0\1\0\1\0\1\fnoremap\2\tOpen\t<F5>\6n\bset\vkeymap\bvim\rchadtree\frequire\0", "config", "chadtree")
-time([[Config for chadtree]], false)
--- Config for: trouble.nvim
-time([[Config for trouble.nvim]], true)
-try_loadstring("\27LJ\2\nŒ\1\0\0\n\0\n\1\0166\0\0\0'\2\1\0B\0\2\0029\1\2\0004\3\3\0006\4\3\0009\4\4\0049\4\5\4'\6\6\0'\a\a\0009\b\b\0005\t\t\0B\4\5\0?\4\0\0B\1\2\1K\0\1\0\1\0\1\fnoremap\2\vtoggle\t<F4>\6n\bset\vkeymap\bvim\nsetup\ftrouble\frequire\3€€À™\4\0", "config", "trouble.nvim")
-time([[Config for trouble.nvim]], false)
--- Config for: galaxyline.nvim
-time([[Config for galaxyline.nvim]], true)
-try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30galaxyline.themes.eviline\frequire\0", "config", "galaxyline.nvim")
-time([[Config for galaxyline.nvim]], false)
--- Config for: eslint
-time([[Config for eslint]], true)
-try_loadstring("\27LJ\2\nË\2\0\0\6\0\14\0\0176\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0005\4\5\0005\5\6\0=\5\a\4=\4\b\0035\4\t\0=\4\n\3=\3\v\0025\3\f\0=\3\r\2B\0\2\1K\0\1\0\16diagnostics\1\0\3\venable\2\vrun_on\ttype%report_unused_disable_directives\1\17code_actions\25disable_rule_comment\1\0\2\rlocation\18separate_line\venable\2\18apply_on_save\ntypes\1\5\0\0\14directive\fproblem\15suggestion\vlayout\1\0\1\venable\2\1\0\1\venable\2\1\0\1\bbin\reslint_d\nsetup\veslint\frequire\0", "config", "eslint")
-time([[Config for eslint]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+try_loadstring("\27LJ\2\nê\1\0\0\4\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\6\0=\3\a\2B\0\2\1K\0\1\0\14highlight\1\0\2\venable\2&additional_vim_regex_highlighting\1\21ensure_installed\1\0\2\17sync_install\1\17auto_install\2\1\a\0\0\thelp\15javascript\15typescript\6c\blua\bvim\nsetup\28nvim-treesitter.configs\frequire\0", "config", "nvim-treesitter")
+time([[Config for nvim-treesitter]], false)
+-- Config for: vim-fugitive
+time([[Config for vim-fugitive]], true)
+try_loadstring("\27LJ\2\nS\0\0\5\0\a\0\n6\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0006\4\0\0009\4\5\0049\4\6\4B\0\4\1K\0\1\0\bGit\bcmd\15<leader>gs\6n\bset\vkeymap\bvim\0", "config", "vim-fugitive")
+time([[Config for vim-fugitive]], false)
+-- Config for: undotree
+time([[Config for undotree]], true)
+try_loadstring("\27LJ\2\n]\0\0\5\0\a\0\n6\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0006\4\0\0009\4\5\0049\4\6\4B\0\4\1K\0\1\0\19UndotreeToggle\bcmd\14<leader>u\6n\bset\vkeymap\bvim\0", "config", "undotree")
+time([[Config for undotree]], false)
+-- Config for: mason.nvim
+time([[Config for mason.nvim]], true)
+try_loadstring("\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nmason\frequire\0", "config", "mason.nvim")
+time([[Config for mason.nvim]], false)
+-- Config for: mason-lspconfig.nvim
+time([[Config for mason-lspconfig.nvim]], true)
+try_loadstring("\27LJ\2\nŠ\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\21ensure_installed\1\0\0\1\5\0\0\16sumneko_lua\rtsserver\17intelephense\veslint\nsetup\20mason-lspconfig\frequire\0", "config", "mason-lspconfig.nvim")
+time([[Config for mason-lspconfig.nvim]], false)
 -- Config for: reach.nvim
 time([[Config for reach.nvim]], true)
 try_loadstring("\27LJ\2\nØ\1\0\0\n\0\14\1\0256\0\0\0'\2\1\0B\0\2\0029\1\2\0005\3\3\0006\4\4\0009\4\5\0049\4\6\4'\6\a\0'\a\b\0009\b\t\0005\t\n\0B\4\5\2>\4\1\0036\4\4\0009\4\5\0049\4\6\4'\6\a\0'\a\v\0009\b\f\0005\t\r\0B\4\5\0?\4\0\0B\1\2\1K\0\1\0\1\0\1\fnoremap\2\nmarks\t<F3>\1\0\1\fnoremap\2\fbuffers\t<F2>\6n\bset\vkeymap\bvim\1\0\1\18notifications\2\nsetup\nreach\frequire\5€€À™\4\0", "config", "reach.nvim")
@@ -223,10 +239,34 @@ time([[Config for reach.nvim]], false)
 time([[Config for null-ls.nvim]], true)
 try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fnull-ls\frequire\0", "config", "null-ls.nvim")
 time([[Config for null-ls.nvim]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+try_loadstring("\27LJ\2\n»\4\0\0\b\0\28\0N6\0\0\0'\2\1\0B\0\2\0029\1\2\0B\1\1\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\a\0006\5\0\0'\a\b\0B\5\2\0029\5\t\0055\6\n\0B\1\5\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\v\0006\5\0\0'\a\b\0B\5\2\0029\5\f\0055\6\r\0B\1\5\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\14\0006\5\0\0'\a\b\0B\5\2\0029\5\15\0055\6\16\0B\1\5\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\17\0006\5\0\0'\a\b\0B\5\2\0029\5\18\0055\6\19\0B\1\5\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\20\0006\5\0\0'\a\b\0B\5\2\0029\5\21\0055\6\22\0B\1\5\0016\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\23\0006\5\0\0'\a\b\0B\5\2\0029\5\24\0055\6\25\0B\1\5\0016\1\0\0'\3\1\0B\1\2\0029\1\26\1'\3\27\0B\1\2\1K\0\1\0\bfzf\19load_extension\1\0\1\fnoremap\2\vresume\afr\1\0\1\fnoremap\2\16grep_string\afs\1\0\1\fnoremap\2\14live_grep\afg\1\0\1\fnoremap\2\30current_buffer_fuzzy_find\afb\1\0\1\fnoremap\2\14git_files\15<leader>gf\1\0\1\fnoremap\2\15find_files\22telescope.builtin\aff\6n\bset\vkeymap\bvim\nsetup\14telescope\frequire\0", "config", "telescope.nvim")
+time([[Config for telescope.nvim]], false)
+-- Config for: eslint
+time([[Config for eslint]], true)
+try_loadstring("\27LJ\2\nè\2\0\0\6\0\14\0\0176\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0005\4\5\0005\5\6\0=\5\a\4=\4\b\0035\4\t\0=\4\n\3=\3\v\0025\3\f\0=\3\r\2B\0\2\1K\0\1\0\16diagnostics\1\0\3%report_unused_disable_directives\1\venable\2\vrun_on\ttype\17code_actions\25disable_rule_comment\1\0\2\venable\2\rlocation\18separate_line\18apply_on_save\ntypes\1\5\0\0\14directive\fproblem\15suggestion\vlayout\1\0\1\venable\2\1\0\1\venable\2\1\0\2\bbin\reslint_d\bcmd\29eslint_d -f visualstudio\nsetup\veslint\frequire\0", "config", "eslint")
+time([[Config for eslint]], false)
+-- Config for: chadtree
+time([[Config for chadtree]], true)
+try_loadstring("\27LJ\2\no\0\0\a\0\t\0\f6\0\0\0'\2\1\0B\0\2\0026\1\2\0009\1\3\0019\1\4\1'\3\5\0'\4\6\0009\5\a\0005\6\b\0B\1\5\1K\0\1\0\1\0\1\fnoremap\2\tOpen\t<F5>\6n\bset\vkeymap\bvim\rchadtree\frequire\0", "config", "chadtree")
+time([[Config for chadtree]], false)
+-- Config for: galaxyline.nvim
+time([[Config for galaxyline.nvim]], true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30galaxyline.themes.eviline\frequire\0", "config", "galaxyline.nvim")
+time([[Config for galaxyline.nvim]], false)
 -- Config for: nvim-neoclip.lua
 time([[Config for nvim-neoclip.lua]], true)
-try_loadstring("\27LJ\2\n’\1\0\0\a\0\n\0\0146\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0026\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\a\0'\5\b\0005\6\t\0B\1\5\1K\0\1\0\1\0\1\fnoremap\2\27:Telescope neoclip<cr>\r<space>m\6n\bset\vkeymap\bvim\nsetup\fneoclip\frequire\0", "config", "nvim-neoclip.lua")
+try_loadstring("\27LJ\2\n“\1\0\0\a\0\n\0\0146\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0026\1\3\0009\1\4\0019\1\5\1'\3\6\0'\4\a\0'\5\b\0005\6\t\0B\1\5\1K\0\1\0\1\0\1\fnoremap\2\27:Telescope neoclip<cr>\14<leader>m\6n\bset\vkeymap\bvim\nsetup\fneoclip\frequire\0", "config", "nvim-neoclip.lua")
 time([[Config for nvim-neoclip.lua]], false)
+-- Config for: trouble.nvim
+time([[Config for trouble.nvim]], true)
+try_loadstring("\27LJ\2\nŒ\1\0\0\n\0\n\1\0166\0\0\0'\2\1\0B\0\2\0029\1\2\0004\3\3\0006\4\3\0009\4\4\0049\4\5\4'\6\6\0'\a\a\0009\b\b\0005\t\t\0B\4\5\0?\4\0\0B\1\2\1K\0\1\0\1\0\1\fnoremap\2\vtoggle\t<F4>\6n\bset\vkeymap\bvim\nsetup\ftrouble\frequire\3€€À™\4\0", "config", "trouble.nvim")
+time([[Config for trouble.nvim]], false)
+-- Config for: toggleterm.nvim
+time([[Config for toggleterm.nvim]], true)
+try_loadstring("\27LJ\2\nl\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\3\tsize\3P\14direction\rvertical\17open_mapping\n<C-'>\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
+time([[Config for toggleterm.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
