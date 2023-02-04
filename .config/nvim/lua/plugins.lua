@@ -37,12 +37,16 @@ return require('packer').startup(function(use)
         requires = 'plenary',
         config = function()
             require('harpoon').setup()
-            vim.keymap.set('n', '<leader>m', require('harpoon.mark').add_file)
+            vim.keymap.set('n', '<leader>m', function()
+                require('harpoon.mark').add_file()
+                print('file harpooned')
+            end)
             vim.keymap.set('n', '<leader>\'', require('harpoon.ui').toggle_quick_menu)
             vim.keymap.set('n', '<leader>j', require('harpoon.ui').nav_next)
             vim.keymap.set('n', '<leader>k', require('harpoon.ui').nav_prev)
             vim.keymap.set('n', '<leader>t', function()
                 require('harpoon.term').gotoTerminal(1)
+                vim.cmd.startinsert()
             end)
         end
     })
@@ -59,8 +63,7 @@ return require('packer').startup(function(use)
 
     use {
         'nvim-telescope/telescope.nvim',
-        -- tag = '0.1.0',
-        requires = { { 'nvim-lua/plenary.nvim' } },
+        requires = 'plenary',
         extensions = {
             fzf = {
                 fuzzy = true, -- false will only do exact matching
@@ -86,18 +89,9 @@ return require('packer').startup(function(use)
     use 'kyazdani42/nvim-web-devicons';
     require('nvim-web-devicons').setup()
 
-    -- use {
-    --   'tanvirtin/vgit.nvim',
-    --   requires = {
-    --     'nvim-lua/plenary.nvim'
-    --   }
-    -- }
-    -- require('vgit').setup()
-    --
-
     use {
         'lewis6991/gitsigns.nvim',
-        -- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
+        tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
     }
 
     require('gitsigns').setup({
@@ -143,28 +137,17 @@ return require('packer').startup(function(use)
         end
     })
 
-    use {
-        "AckslD/nvim-neoclip.lua",
-        requires = {
-            { 'nvim-telescope/telescope.nvim' },
-        },
-        config = function()
-            local clip = require('neoclip').setup();
-            -- vim.keymap.set('n', '<leader>m', ':Telescope neoclip<cr>', { noremap = true });
-        end
-    }
+    -- use({
+    --     "NTBBloodbath/galaxyline.nvim",
+    --     -- your statusline
+    --     config = function()
+    --         require("galaxyline.themes.colors")
+    --     end,
+    --     -- some optional icons
+    --     requires = { "kyazdani42/nvim-web-devicons", opt = true }
+    -- })
 
-    use({
-        "NTBBloodbath/galaxyline.nvim",
-        -- your statusline
-        config = function()
-            require("galaxyline.themes.eviline")
-        end,
-        -- some optional icons
-        requires = { "kyazdani42/nvim-web-devicons", opt = true }
-    })
-
-    use { 'Everblush/everblush.nvim', as = 'everblush' }
+    -- use { 'Everblush/everblush.nvim', as = 'everblush' }
 
     use {
         'ms-jpq/chadtree',
@@ -300,6 +283,41 @@ return require('packer').startup(function(use)
         end
     })
 
+    use({
+        'shaunsingh/solarized.nvim',
+        as = 'solarized'
+    })
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = {
+            { 'kyazdani42/nvim-web-devicons', opt = true },
+            { 'shaunsingh/solarized.nvim', opt = true }
+        },
+        config = function()
+            require('lualine').setup {
+                options = {
+                    theme = 'solarized',
+                    globalstatus = true
+                },
+                sections = {
+                    lualine_a = { 'mode', 'location' },
+                    lualine_b = { { 'filename', path = 1 }, 'filesize' },
+                    lualine_c = { 'diagnostics', 'searchcount' },
+                    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+                    lualine_y = { 'progress' },
+                    lualine_z = { 'branch', 'diff' }
+                },
+                inactive_sections = {
+                    lualine_a = {},
+                    lualine_b = {},
+                    lualine_c = { 'filename' },
+                    lualine_x = { 'location' },
+                    lualine_y = {},
+                    lualine_z = {}
+                },
+            }
+        end
+    }
 
     vim.diagnostic.config({
         virtual_text = true,
