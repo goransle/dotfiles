@@ -1,5 +1,3 @@
-vim.opt.guicursor = ""
-
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -24,6 +22,10 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
+
+vim.opt.termguicolors = true
+-- vim.g.terminal_color_4 = '#ff0000'
+-- vim.g.terminal_color_5 = 'green'
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -171,6 +173,10 @@ lsp.intelephense.setup({
 })
 
 lsp.svelte.setup({
+  on_attach = on_attach
+})
+
+lsp.cssls.setup({
   on_attach = on_attach
 })
 
