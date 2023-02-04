@@ -304,7 +304,7 @@ return require('packer').startup(function(use)
                     lualine_b = { { 'filename', path = 1 }, 'filesize' },
                     lualine_c = { 'diagnostics', 'searchcount' },
                     lualine_x = { 'encoding', 'fileformat', 'filetype' },
-                    lualine_y = { 'progress' },
+                    lualine_y = { { 'progress', } },
                     lualine_z = { 'branch', 'diff' }
                 },
                 inactive_sections = {
