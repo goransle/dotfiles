@@ -46,6 +46,7 @@ return require('packer').startup(function(use)
             vim.keymap.set('n', '<leader>k', require('harpoon.ui').nav_prev)
             vim.keymap.set('n', '<leader>t', function()
                 require('harpoon.term').gotoTerminal(1)
+                vim.g.maplocalleader = '<C>'
                 vim.cmd.startinsert()
             end)
         end
@@ -160,10 +161,12 @@ return require('packer').startup(function(use)
 
     use({
         "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-            require("null-ls").setup()
-        end,
         requires = { "nvim-lua/plenary.nvim" },
+    })
+
+    use({
+        'MunifTanjim/prettier.nvim',
+        requires = {"jose-elias-alvarez/null-ls.nvim"},
     })
 
     use({
@@ -193,37 +196,20 @@ return require('packer').startup(function(use)
         'tpope/vim-fugitive',
         config = function()
             vim.keymap.set('n', '<leader>gs', vim.cmd.Git);
+            vim.keymap.set('n', '<leader>ga', ':Git add .');
+            vim.keymap.set('n', '<leader>gc', ':Git commit');
+            vim.keymap.set('n', '<leader>gp', ':Git push');
+            vim.keymap.set('n', '<leader>gP', ':Git pull <CR>');
+            vim.keymap.set('n', '<leader>gco', ':Git checkout ');
         end
     })
 
     use {
         'MunifTanjim/eslint.nvim',
         as = 'eslint',
-        config = function()
-            require('eslint').setup({
-                bin = 'eslint_d', -- or `eslint_d`
-                cmd = 'eslint_d -f visualstudio',
-                code_actions = {
-                    enable = true,
-                    apply_on_save = {
-                        enable = true,
-                        types = { "directive", "problem", "suggestion", "layout" },
-                    },
-                    disable_rule_comment = {
-                        enable = true,
-                        location = "separate_line", -- or `same_line`
-                    },
-                },
-                diagnostics = {
-                    enable = true,
-                    report_unused_disable_directives = false,
-                    run_on = "type", -- or `save`
-                },
-
-            })
-        end,
         requires = { "jose-elias-alvarez/null-ls.nvim" }
     }
+
 
 
     use {
@@ -238,7 +224,7 @@ return require('packer').startup(function(use)
         requires = "williamboman/mason.nvim",
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "sumneko_lua", "tsserver", "intelephense", "eslint" },
+                -- ensure_installed = { 'tsserver', 'eslint' },
             })
         end
     })
@@ -296,8 +282,7 @@ return require('packer').startup(function(use)
         config = function()
             require('lualine').setup {
                 options = {
-                    theme = 'solarized',
-                    globalstatus = true
+                    theme = 'solarized'
                 },
                 sections = {
                     lualine_a = { 'mode', 'location' },
@@ -318,8 +303,25 @@ return require('packer').startup(function(use)
             }
         end
     }
+    use {
+        "SmiteshP/nvim-navbuddy",
+        requires = {
+            "neovim/nvim-lspconfig",
+            "SmiteshP/nvim-navic",
+            "MunifTanjim/nui.nvim"
+        }
+    }
+
+    use({
+        'habamax/vim-godot',
+        config = function()
+            vim.g.godot_executable = '/Applications/Godot.app'
+        end
+    })
 
     vim.diagnostic.config({
         virtual_text = true,
     })
+
+    use {'github/copilot.vim', branch = 'release' }
 end)

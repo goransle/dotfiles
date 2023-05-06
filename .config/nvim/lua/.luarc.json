@@ -26,6 +26,7 @@
         "/Users/goranslettemark/.local/share/nvim/site/pack/packer/start/vim-obsession",
         "/opt/homebrew/Cellar/neovim/0.8.1/share/nvim/runtime",
         "/opt/homebrew/Cellar/neovim/0.8.1/lib/nvim",
+        "${3rd}/luassert/library",
         "${3rd}/luassert/library"
     ]
 }
