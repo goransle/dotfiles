@@ -9,6 +9,7 @@ if status is-interactive
 
     set -U fish_greeting # unset the greeting message
     set -gx EDITOR nvim
+    set -gx DENO_DEPLOY_TOKEN ddp_Gv8Nnyf7Rqvh0DiQs0K4PHYFaX2HYK1BueWJ
 
     alias python=python3
 

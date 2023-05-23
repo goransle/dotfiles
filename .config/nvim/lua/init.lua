@@ -302,3 +302,6 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
 })
 
 vim.keymap.set('n', '<leader>co', ':Copilot<CR>')
+
+-- productivity +++
+vim.api.nvim_create_user_command('W', ':w', {})
