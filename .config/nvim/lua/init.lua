@@ -166,29 +166,6 @@ lsp.pyright.setup({
     on_attach = on_attach
 })
 
-lsp.intelephense.setup({
-    on_attach = on_attach,
-    filetypes = { 'php' };
-    root_dir = function(fname)
-        return vim.loop.cwd()
-    end;
-    settings = {
-        intelephense = {
-            files = {
-                maxSize = 1000000;
-            };
-            environment = {
-                includePaths = {
-                    "~/DevKinsta/public/woo-local"
-                }
-            },
-            format = {
-                braces = 'k&r'
-            }
-        }
-    }
-})
-
 lsp.svelte.setup({
     on_attach = on_attach
 })
