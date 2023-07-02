@@ -87,7 +87,9 @@ return require('packer').startup(function(use)
         end
     }
 
-    use 'kyazdani42/nvim-web-devicons';
+    use {
+        'kyazdani42/nvim-web-devicons'
+    };
     require('nvim-web-devicons').setup()
 
     use {
@@ -155,9 +157,15 @@ return require('packer').startup(function(use)
         run = 'python3 -m chadtree deps',
         config = function()
             local chad = require('chadtree');
+
             vim.keymap.set('n', '<F5>', chad.Open, { noremap = true });
         end
     }
+            local chadtree_settings = {
+            }
+
+
+            vim.api.nvim_set_var('chadtree_settings', chadtree_settings)
 
     use({
         "jose-elias-alvarez/null-ls.nvim",
