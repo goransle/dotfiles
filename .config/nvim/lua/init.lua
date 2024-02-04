@@ -37,7 +37,6 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
--- next greatest remap ever : asbjornHaland
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
@@ -46,6 +45,18 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set("n", "Q", "<nop>")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+local format = function()
+    local eslint_d = require('lint').linters.eslint_d;
+    table.insert(eslint_d.args);
+    require("lint").try_lint();
+    -- vim.cmd(':sleep 100m');
+    -- vim.cmd(':e'); -- totally safe
+
+    table.remove(eslint_d.args);
+end
+
+
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -57,17 +68,13 @@ local on_attach = function(client, bufnr)
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
-    local format = function()
-        vim.lsp.buf.format({})
-    end
-
     if client.name == "eslint" then
         -- vim.cmd.LspStop('eslint')
         return
     end
 
     if client.name == "tsserver" then
-        -- client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentFormattingProvider = false
     end
 
 
@@ -103,7 +110,14 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '<leader>f', format, bufopts)
+    vim.keymap.set('n', '<leader>f', 
+    function()
+	    if(client.server_capabilities.documentFormattingProvider) then
+		    vim.lsp.buf.format({})
+	    end 
+        format()
+    end
+    , bufopts)
 
     local navbuddy = require("nvim-navbuddy")
     navbuddy.attach(client, bufnr)
@@ -197,78 +211,43 @@ lsp.cssls.setup({
     --
     -- });
 
-    local null_ls = require("null-ls")
 
     local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
     local event = "BufWritePre" -- or "BufWritePost"
     local async = event == "BufWritePost"
 
-    null_ls.setup({
-        on_attach = function(client, bufnr)
-            if client.supports_method("textDocument/formatting") then
-                vim.keymap.set("n", "<Leader>f", function()
-                    vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-                end, { buffer = bufnr, desc = "[lsp] format" })
-
-                -- format on save
-                vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
-                vim.api.nvim_create_autocmd(event, {
-                    buffer = bufnr,
-                    group = group,
-                    callback = function()
-                        vim.lsp.buf.format({ bufnr = bufnr, async = async })
-                    end,
-                    desc = "[lsp] format on save",
-                })
-            end
-
-            if client.supports_method("textDocument/rangeFormatting") then
-                vim.keymap.set("x", "<Leader>f", function()
-                    vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-                end, { buffer = bufnr, desc = "[lsp] format" })
-            end
-
-        end,
-    })
-
-    local prettier = require("prettier")
-
-    prettier.setup({
-        bin = 'prettier', -- or `'prettierd'` (v0.22+)
-        filetypes = {
-            "css",
-            "graphql",
-            "html",
-            "javascript",
-            "javascriptreact",
-            "json",
-            "less",
-            "markdown",
-            "scss",
-            "typescript",
-            "typescriptreact",
-            "yaml",
-        },
-        ["null-ls"] = {
-            condition = function()
-                return prettier.config_exists({
-                    -- if `false`, skips checking `package.json` for `"prettier"` key
-                    check_package_json = true,
-                })
-            end,
-            runtime_condition = function(params)
-                -- return false to skip running prettier
-                return true
-            end,
-            timeout = 5000,
-        }
-    })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+lsp.emmet_ls.setup({
+    -- on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue" },
+    init_options = {
+      html = {
+        options = {
+          -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+          ["bem.enabled"] = true,
+        },
+      },
+    }
+})
+
 
 require('colors')
+
+
+require('lint').linters_by_ft = {
+  markdown = {'vale',},
+  javascript = {'eslint_d'}
+}
+
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  callback = function()
+    require('lint').try_lint()
+  end,
+})
 
 
 vim.api.nvim_create_autocmd({ 'TermOpen' }, {
@@ -279,6 +258,23 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
 })
 
 vim.keymap.set('n', '<leader>co', ':Copilot<CR>')
+vim.keymap.set('i', '<c-l>', 'copilot#Accept()', { silent = true, expr = true, replace_keycodes = false })
+vim.keymap.set('i', '<C-j>', 'copilot#Next()', { silent = true, expr = true })
+vim.keymap.set('i', '<C-k>', 'copilot#Previous()', { silent = true, expr = true })
 
 -- productivity +++
 vim.api.nvim_create_user_command('W', ':w', {})
+
+local abbrevs = {
+    boid = 'void',
+    josn = 'json'
+}
+
+for typo, replacement in pairs(abbrevs) do
+    vim.cmd(':iabbrev ' .. typo .. ' ' .. replacement)
+    -- TODO: use this when it's released
+    -- vim.keymap.set('!a', 'boid', 'void');
+end
+
+
+

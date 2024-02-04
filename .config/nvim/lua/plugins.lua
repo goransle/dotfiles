@@ -76,7 +76,13 @@ return require('packer').startup(function(use)
         },
         config = function()
             local telescope = require('telescope');
-            telescope.setup()
+            telescope.setup({
+                pickers = {
+                    find_files = {
+                        hidden = true
+                    }
+                }
+            });
             vim.keymap.set('n', 'ff', require('telescope.builtin').find_files, { noremap = true });
             vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { noremap = true });
             vim.keymap.set('n', 'fb', require('telescope.builtin').current_buffer_fuzzy_find, { noremap = true });
@@ -168,22 +174,12 @@ return require('packer').startup(function(use)
             vim.api.nvim_set_var('chadtree_settings', chadtree_settings)
 
     use({
-        "jose-elias-alvarez/null-ls.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
-    })
-
-    use({
-        'MunifTanjim/prettier.nvim',
-        requires = {"jose-elias-alvarez/null-ls.nvim"},
-    })
-
-    use({
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
         config = function()
             require 'nvim-treesitter.configs'.setup {
                 -- A list of parser names, or "all" (the four listed parsers should always be installed)
-                ensure_installed = { "help", "javascript", "typescript", "c", "lua", "vim" },
+                ensure_installed = { "help", "javascript", "typescript", "c", "lua", "vim", "rust" },
 
                 -- Install parsers synchronously (only applied to `ensure_installed`)
                 sync_install = false,
@@ -204,7 +200,14 @@ return require('packer').startup(function(use)
         'tpope/vim-fugitive',
         config = function()
             vim.keymap.set('n', '<leader>gs', vim.cmd.Git);
-            vim.keymap.set('n', '<leader>ga', ':Git add .');
+
+            local function add_current_file()
+                local file = vim.api.nvim_buf_get_name(0);
+                vim.cmd(':Git add '..file);
+                print('Git added '..file)
+            end
+
+            vim.keymap.set('n', '<leader>ga', add_current_file);
             vim.keymap.set('n', '<leader>gc', ':Git commit');
             vim.keymap.set('n', '<leader>gp', ':Git push');
             vim.keymap.set('n', '<leader>gP', ':Git pull <CR>');
@@ -212,13 +215,7 @@ return require('packer').startup(function(use)
         end
     })
 
-    use {
-        'MunifTanjim/eslint.nvim',
-        as = 'eslint',
-        requires = { "jose-elias-alvarez/null-ls.nvim" }
-    }
-
-
+    use ('mfussenegger/nvim-lint')
 
     use {
         "williamboman/mason.nvim",
@@ -241,6 +238,22 @@ return require('packer').startup(function(use)
         as = 'lspconfig',
         requires = 'williamboman/mason-lspconfig.nvim'
     })
+
+    use 'simrat39/rust-tools.nvim'
+
+    local rt = require("rust-tools")
+
+    rt.setup({
+        server = {
+            on_attach = function(_, bufnr)
+                -- Hover actions
+                vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
+                -- Code action groups
+                vim.keymap.set("n", "<Leader>ca", rt.code_action_group.code_action_group, { buffer = bufnr })
+            end,
+        },
+    })
+
     use 'ms-jpq/coq_nvim'
 
     use {
@@ -297,7 +310,19 @@ return require('packer').startup(function(use)
                     lualine_b = { { 'filename', path = 1 }, 'filesize' },
                     lualine_c = { 'diagnostics', 'searchcount' },
                     lualine_x = { 'encoding', 'fileformat', 'filetype' },
-                    lualine_y = { { 'progress', } },
+                    lualine_y = { { 'progress', }, 
+
+                        {
+                            'spotify',
+                            color = function()
+                                return {
+                                    fg = '#1DB954',
+                                    bg = '#282828',
+                                    gui = 'bold'
+                                }
+                            end
+
+                    } },
                     lualine_z = { 'branch', 'diff' }
                 },
                 inactive_sections = {
@@ -320,12 +345,16 @@ return require('packer').startup(function(use)
         }
     }
 
-    use({
-        'habamax/vim-godot',
-        config = function()
-            vim.g.godot_executable = '/Applications/Godot.app'
-        end
-    })
+    -- use({
+    --     'habamax/vim-godot',
+    --     config = function()
+    --         vim.g.godot_executable = '/Applications/Godot.app'
+    --     end
+    -- })
+    --
+
+    use ({'mattn/emmet-vim'});
+
 
     vim.diagnostic.config({
         virtual_text = true,

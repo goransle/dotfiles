@@ -12,6 +12,13 @@ if status is-interactive
     set -gx AWS_SDK_JS_SUPPRESS_MAINTENANCE_MODE_MESSAGE 1
 
     alias python=python3
+    alias ga="git add"
+    alias gs="git status"
+    alias gc="git commit"
+    alias gp="git push"
+    alias gl="git log"
+    alias gr="git restore"
+    alias grs="git restore --staged"
 
     nvm use -s # adds the node bins to path using the closest .nvmrc
 end
