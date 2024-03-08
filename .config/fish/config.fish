@@ -10,6 +10,7 @@ if status is-interactive
     set -U fish_greeting # unset the greeting message
     set -gx EDITOR nvim
     set -gx AWS_SDK_JS_SUPPRESS_MAINTENANCE_MODE_MESSAGE 1
+    set -gx FIREFOX_BIN /Applications/Firefox.app/Contents/MacOS/firefox
 
     alias python=python3
     alias ga="git add"
@@ -19,6 +20,8 @@ if status is-interactive
     alias gl="git log"
     alias gr="git restore"
     alias grs="git restore --staged"
+
+    zoxide init --cmd cd fish | source
 
     nvm use -s # adds the node bins to path using the closest .nvmrc
 end

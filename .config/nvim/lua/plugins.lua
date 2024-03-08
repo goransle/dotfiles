@@ -21,15 +21,35 @@ return require('packer').startup(function(use)
         end
     }
 
-    use { "akinsho/toggleterm.nvim", tag = '*', config = function()
-        require("toggleterm").setup({
-            open_mapping = [[<C-'>]],
-            direction = 'vertical',
-            size = 80
-        })
-    end }
+
+    -- use { "akinsho/toggleterm.nvim", tag = '*', config = function()
+    --     require("toggleterm").setup({
+    --         open_mapping = [[<C-'>]],
+    --         direction = 'vertical',
+    --         size = 80
+    --     })
+    -- end }
 
     use({ 'nvim-lua/plenary.nvim', as = 'plenary' })
+
+    use ({
+          'folke/todo-comments.nvim',
+          as = 'todo-comments',
+          requires = 'plenary',
+          config = function()
+              require('todo-comments').setup({
+                keywords = {
+                    FIX = { icon = "🐞", color = "error", alt = { "FIXME", "BUG", "FIXIT", "ISSUE" } },
+                    TODO = { icon = "💀", color = "hint" },
+                    HACK = { icon = "🔥", color = "warning" },
+                    WARN = { icon = "⚠️", color = "warning", alt = { "WARNING", "XXX" } },
+                    PERF = { icon = "🏎️", color = "hint", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+                    NOTE = { icon = "📝", color = "hint", alt = { "INFO" } },
+                    TEST = { icon = "🧪", color = "hint", alt = { "TESTING" } },
+                }
+              })
+          end
+    })
 
     use({
         'ThePrimeagen/harpoon',
@@ -44,11 +64,14 @@ return require('packer').startup(function(use)
             vim.keymap.set('n', '<leader>\'', require('harpoon.ui').toggle_quick_menu)
             vim.keymap.set('n', '<leader>j', require('harpoon.ui').nav_next)
             vim.keymap.set('n', '<leader>k', require('harpoon.ui').nav_prev)
-            vim.keymap.set('n', '<leader>t', function()
+            vim.keymap.set('n', '<C-\'>', function()
                 require('harpoon.term').gotoTerminal(1)
                 vim.g.maplocalleader = '<C>'
                 vim.cmd.startinsert()
             end)
+            -- vim.keymap.set('n', '<leader>1', function()
+            --     require('harpoon.tmux').gotoTerminal(1)
+            -- end)
         end
     })
 

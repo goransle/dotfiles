@@ -149,6 +149,13 @@ lsp.denols.setup(coq.lsp_ensure_capabilities({
     }
 }))
 
+lsp.intelephense.setup(coq.lsp_ensure_capabilities({
+    on_attach = on_attach,
+    init_options = {
+        lint = true
+    }
+}))
+
 
 
 -- lsp.luals.setup(coq.lsp_ensure_capabilities({
