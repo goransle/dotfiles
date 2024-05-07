@@ -6,6 +6,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
+
 vim.g.mapleader = ' '
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -46,15 +47,15 @@ vim.keymap.set("n", "Q", "<nop>")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
-local format = function()
-    local eslint_d = require('lint').linters.eslint_d;
-    table.insert(eslint_d.args);
-    require("lint").try_lint();
-    -- vim.cmd(':sleep 100m');
-    -- vim.cmd(':e'); -- totally safe
-
-    table.remove(eslint_d.args);
-end
+-- local format = function()
+--     local eslint_d = require('lint').linters.eslint_d;
+--     table.insert(eslint_d.args);
+--     require("lint").try_lint();
+--     -- vim.cmd(':sleep 100m');
+--     -- vim.cmd(':e'); -- totally safe
+--
+--     table.remove(eslint_d.args);
+-- end
 
 
 
@@ -153,8 +154,23 @@ lsp.intelephense.setup(coq.lsp_ensure_capabilities({
     on_attach = on_attach,
     init_options = {
         lint = true
+    },
+    settings = {
+        intelephense = {
+            files = {
+                maxSize = 10000000000000
+            },
+            environment = {
+                includePaths = {
+                    "~/hs/wordpress/wordpress/",
+                    "~/hs/wordpress/plugins/"
+                }
+            }
+        }
     }
 }))
+
+lsp.biome.setup({})
 
 
 
@@ -247,7 +263,7 @@ require('colors')
 
 require('lint').linters_by_ft = {
   markdown = {'vale',},
-  javascript = {'eslint_d'}
+  -- javascript = {'eslint_d'}
 }
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
@@ -264,13 +280,30 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
     end
 })
 
-vim.keymap.set('n', '<leader>co', ':Copilot<CR>')
-vim.keymap.set('i', '<c-l>', 'copilot#Accept()', { silent = true, expr = true, replace_keycodes = false })
-vim.keymap.set('i', '<C-j>', 'copilot#Next()', { silent = true, expr = true })
-vim.keymap.set('i', '<C-k>', 'copilot#Previous()', { silent = true, expr = true })
+-- Copilot --
+-- vim.g.copilot_enabled = false;
+--
+-- vim.keymap.set('n', '<leader>co', function()
+--     vim.g.copilot_enabled = not vim.g.copilot_enabled;
+--
+--     print('Copilot is now ' .. (vim.g.copilot_enabled and 'enabled' or 'disabled') .. '');
+-- end, { silent = true })
+--
+-- vim.keymap.set('n', '<leader>cop', ':Copilot<CR>', { silent = true });
+-- vim.keymap.set('i', '<c-l>', 'copilot#Accept()', { silent = true, expr = true, replace_keycodes = false })
+-- vim.keymap.set('i', '<C-j>', 'copilot#Next()', { silent = true, expr = true })
+-- vim.keymap.set('i', '<C-k>', 'copilot#Previous()', { silent = true, expr = true })
+--
+
+-- Tabby --
+
+vim.g.tabby_keybinding_accept = '<C-l>'
+vim.g.tabby_keybinding_trigger_or_dismiss = '<C-j>'
+
 
 -- productivity +++
 vim.api.nvim_create_user_command('W', ':w', {})
+vim.api.nvim_create_user_command('Wq', ':wq', {})
 
 local abbrevs = {
     boid = 'void',
@@ -280,7 +313,7 @@ local abbrevs = {
 for typo, replacement in pairs(abbrevs) do
     vim.cmd(':iabbrev ' .. typo .. ' ' .. replacement)
     -- TODO: use this when it's released
-    -- vim.keymap.set('!a', 'boid', 'void');
+    -- vim.keymap.set('!a', typo, replacement);
 end
 
 

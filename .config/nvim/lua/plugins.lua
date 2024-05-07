@@ -7,8 +7,6 @@ return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
-    use 'tpope/vim-obsession'
-
     use {
         'toppair/reach.nvim',
         config = function()
@@ -21,16 +19,23 @@ return require('packer').startup(function(use)
         end
     }
 
-
-    -- use { "akinsho/toggleterm.nvim", tag = '*', config = function()
-    --     require("toggleterm").setup({
-    --         open_mapping = [[<C-'>]],
-    --         direction = 'vertical',
-    --         size = 80
-    --     })
-    -- end }
-
     use({ 'nvim-lua/plenary.nvim', as = 'plenary' })
+
+    use ({
+        'ruifm/gitlinker.nvim',
+        requires = 'plenary',
+        config = function()
+            require('gitlinker').setup()
+
+            vim.api.nvim_set_keymap(
+                'n', 
+                '<leader>gx', 
+                '<cmd>lua require"gitlinker".get_buf_range_url("n", {action_callback = require"gitlinker.actions".open_in_browser})<cr>',
+                {silent = true}
+            )
+
+        end
+    })
 
     use ({
           'folke/todo-comments.nvim',
@@ -99,13 +104,40 @@ return require('packer').startup(function(use)
         },
         config = function()
             local telescope = require('telescope');
+            local telescopeConfig = require("telescope.config")
+            -- Clone the default Telescope configuration
+            local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
+
+            -- I want to search in hidden/dot files.
+            table.insert(vimgrep_arguments, "--hidden")
+            -- I don't want to search in the `.git` directory.
+            table.insert(vimgrep_arguments, "--glob")
+            table.insert(vimgrep_arguments, "!**/.git/*")
+
             telescope.setup({
+                defaults = {
+                    vimgrep_arguments = vimgrep_arguments,
+                },
                 pickers = {
                     find_files = {
                         hidden = true
                     }
                 }
             });
+
+            local telescope_ignore_patterns = {}
+
+            vim.keymap.set("n", "<leader>tfi", function()
+                vim.g.telescope_ignore_enabled = not vim.g.telescope_ignore_enabled
+
+                require("telescope.config").set_defaults({
+                    file_ignore_patterns = vim.g.telescope_ignore_enabled and telescope_ignore_patterns or {},
+                })
+
+                print("Telescope ignore patterns are now " .. (vim.g.telescope_ignore_enabled and "enabled" or "disabled"))
+            end, { noremap = true, desc = "Toggle telescope ignore patterns" })
+
+
             vim.keymap.set('n', 'ff', require('telescope.builtin').find_files, { noremap = true });
             vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { noremap = true });
             vim.keymap.set('n', 'fb', require('telescope.builtin').current_buffer_fuzzy_find, { noremap = true });
@@ -169,18 +201,6 @@ return require('packer').startup(function(use)
         end
     })
 
-    -- use({
-    --     "NTBBloodbath/galaxyline.nvim",
-    --     -- your statusline
-    --     config = function()
-    --         require("galaxyline.themes.colors")
-    --     end,
-    --     -- some optional icons
-    --     requires = { "kyazdani42/nvim-web-devicons", opt = true }
-    -- })
-
-    -- use { 'Everblush/everblush.nvim', as = 'everblush' }
-
     use {
         'ms-jpq/chadtree',
         run = 'python3 -m chadtree deps',
@@ -190,11 +210,9 @@ return require('packer').startup(function(use)
             vim.keymap.set('n', '<F5>', chad.Open, { noremap = true });
         end
     }
-            local chadtree_settings = {
-            }
 
-
-            vim.api.nvim_set_var('chadtree_settings', chadtree_settings)
+    local chadtree_settings = {}
+    vim.api.nvim_set_var('chadtree_settings', chadtree_settings)
 
     use({
         'nvim-treesitter/nvim-treesitter',
@@ -256,6 +274,7 @@ return require('packer').startup(function(use)
             })
         end
     })
+
     use({
         'neovim/nvim-lspconfig',
         as = 'lspconfig',
@@ -292,26 +311,6 @@ return require('packer').startup(function(use)
 
     use 'terrortylor/nvim-comment'
     require('nvim_comment').setup()
-
-    use({
-        "folke/zen-mode.nvim",
-        config = function()
-            require("zen-mode").setup {
-                window = {
-                    width = 90,
-                    options = {
-                        number = true,
-                        relativenumber = true,
-                    }
-                },
-            }
-
-            vim.keymap.set("n", "<leader>zz", function()
-                require("zen-mode").toggle()
-                vim.wo.wrap = false
-            end)
-        end
-    })
 
     use({
         'shaunsingh/solarized.nvim',
@@ -368,20 +367,20 @@ return require('packer').startup(function(use)
         }
     }
 
-    -- use({
-    --     'habamax/vim-godot',
-    --     config = function()
-    --         vim.g.godot_executable = '/Applications/Godot.app'
-    --     end
-    -- })
-    --
-
-    use ({'mattn/emmet-vim'});
-
-
     vim.diagnostic.config({
         virtual_text = true,
     })
 
-    use {'github/copilot.vim', branch = 'release' }
+    -- use ({
+    --     'github/copilot.vim', 
+    --     branch = 'release'
+    -- })
+    
+    use({
+        'TabbyML/vim-tabby'
+    })
+
+   vim.g.tabby_node_binary = '/Users/goranslettemark/.local/share/nvm/v20.12.0/bin/node'
+   vim.g.tabby_trigger_mode = 'manual'
+
 end)
