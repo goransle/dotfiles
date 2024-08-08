@@ -7,5 +7,6 @@ Tidsbanken ~5
 Google Kalender ~5
 
 Work-comms.bunch
+Tabby.bunch
 
 !$ (defaultbrowser firefox &> /dev/null && ~/bunches/confirm-dialog &> /dev/null) || exit 0 
