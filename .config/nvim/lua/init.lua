@@ -47,6 +47,20 @@ vim.keymap.set("n", "Q", "<nop>")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
+
+vim.keymap.set("n", "<C-\'>", function()
+    local existing = vim.fn.bufnr("mainterm");
+
+    if (existing > -1) then
+        vim.cmd(':buffer ' .. existing);
+    else 
+        vim.cmd(':terminal');
+        vim.cmd(':keepalt file mainterm');
+    end
+
+    vim.cmd.startinsert();
+end)
+
 -- local format = function()
 --     local eslint_d = require('lint').linters.eslint_d;
 --     table.insert(eslint_d.args);
@@ -170,7 +184,48 @@ lsp.intelephense.setup(coq.lsp_ensure_capabilities({
     }
 }))
 
-lsp.biome.setup({})
+-- lsp.biome.setup({})
+
+lsp.eslint.setup({
+    on_attach = function(client, bufnr)
+        -- vim.api.nvim_create_autocmd("BufWritePre", {
+        --     buffer = bufnr,
+        --     command = "EslintFixAll",
+        -- })
+    end,
+    settings = {
+        codeAction = {
+            disableRuleComment = {
+                enable = true,
+                location = "separateLine"
+            },
+            showDocumentation = {
+                enable = true
+            }
+        },
+        codeActionOnSave = {
+            enable = false,
+            mode = "all"
+        },
+        experimental = {
+            useFlatConfig = false
+        },
+        format = true,
+        nodePath = "",
+        onIgnoredFiles = "off",
+        problems = {
+            shortenToSingleLine = false
+        },
+        quiet = false,
+        rulesCustomizations = {},
+        run = "onType",
+        useESLintClass = false,
+        validate = "on",
+        workingDirectory = {
+            mode = "location"
+        }
+    }
+})
 
 
 
@@ -257,6 +312,8 @@ lsp.emmet_ls.setup({
     }
 })
 
+-- lsp.mdx_analyzer.setup({});
+
 
 require('colors')
 
@@ -266,11 +323,11 @@ require('lint').linters_by_ft = {
   -- javascript = {'eslint_d'}
 }
 
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  callback = function()
-    require('lint').try_lint()
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+--   callback = function()
+--     require('lint').try_lint()
+--   end,
+-- })
 
 
 vim.api.nvim_create_autocmd({ 'TermOpen' }, {

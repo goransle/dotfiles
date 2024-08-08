@@ -27,3 +27,10 @@ if status is-interactive
 
     nvm use -s # adds the node bins to path using the closest .nvmrc
 end
+
+# pnpm
+set -gx PNPM_HOME "/Users/goranslettemark/Library/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
