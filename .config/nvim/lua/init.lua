@@ -6,7 +6,6 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
-
 vim.g.mapleader = ' '
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -48,17 +47,26 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 
-vim.keymap.set("n", "<C-\'>", function()
-    local existing = vim.fn.bufnr("mainterm");
+vim.keymap.set("n", "<C-'>", function()
+    local existing = vim.fn.bufnr("mainterm")
 
-    if (existing > -1) then
-        vim.cmd(':buffer ' .. existing);
-    else 
-        vim.cmd(':terminal');
-        vim.cmd(':keepalt file mainterm');
+    if existing > -1 then
+        vim.cmd('buffer ' .. existing)
+    else
+        vim.cmd('terminal')
+        vim.cmd('keepalt file mainterm')
+        -- Double-check the buffer was named correctly
+        local new_buf = vim.fn.bufnr("mainterm")
+        if new_buf > -1 then
+            vim.cmd('buffer ' .. new_buf)
+        end
+        
+        print('Unable to create terminal')
+
     end
 
-    vim.cmd.startinsert();
+    -- Ensure we're in insert mode
+    vim.cmd('startinsert')
 end)
 
 -- local format = function()
@@ -140,6 +148,10 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>n', navbuddy.open)
 
 end
+
+require("config.lazy")
+
+-- require("lazy").setup({{"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"}})
 
 local lsp = require "lspconfig"
 local coq = require "coq"
@@ -229,29 +241,29 @@ lsp.eslint.setup({
 
 
 
--- lsp.luals.setup(coq.lsp_ensure_capabilities({
---     on_attach = on_attach,
---     settings = {
---         Lua = {
---             runtime = {
---                 -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
---                 version = 'LuaJIT',
---             },
---             diagnostics = {
---                 -- Get the language server to recognize the `vim` global
---                 globals = { 'vim' },
---             },
---             workspace = {
---                 -- Make the server aware of Neovim runtime files
---                 library = vim.api.nvim_get_runtime_file("", true),
---             },
---             -- Do not send telemetry data containing a randomized but unique identifier
---             telemetry = {
---                 enable = false,
---             },
---         },
---     },
--- }))
+lsp.luals.setup(coq.lsp_ensure_capabilities({
+    on_attach = on_attach,
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT',
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { 'vim' },
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true),
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+                enable = false,
+            },
+        },
+    },
+}))
 
 
 lsp.pyright.setup({
