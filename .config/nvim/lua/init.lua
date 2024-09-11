@@ -60,7 +60,7 @@ vim.keymap.set("n", "<C-'>", function()
         if new_buf > -1 then
             vim.cmd('buffer ' .. new_buf)
         end
-        
+
         print('Unable to create terminal')
 
     end
@@ -133,11 +133,11 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '<leader>f', 
+    vim.keymap.set('n', '<leader>f',
     function()
 	    if(client.server_capabilities.documentFormattingProvider) then
 		    vim.lsp.buf.format({})
-	    end 
+	    end
         format()
     end
     , bufopts)
@@ -241,7 +241,7 @@ lsp.eslint.setup({
 
 
 
-lsp.luals.setup(coq.lsp_ensure_capabilities({
+lsp.lua_ls.setup(coq.lsp_ensure_capabilities({
     on_attach = on_attach,
     settings = {
         Lua = {
