@@ -48,25 +48,24 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 
 vim.keymap.set("n", "<C-'>", function()
-    local existing = vim.fn.bufnr("mainterm")
+  local existing = vim.fn.bufnr("mainterm")
 
-    if existing > -1 then
-        vim.cmd('buffer ' .. existing)
-    else
-        vim.cmd('terminal')
-        vim.cmd('keepalt file mainterm')
-        -- Double-check the buffer was named correctly
-        local new_buf = vim.fn.bufnr("mainterm")
-        if new_buf > -1 then
-            vim.cmd('buffer ' .. new_buf)
-        end
-
-        print('Unable to create terminal')
-
+  if existing > -1 then
+    vim.cmd('buffer ' .. existing)
+  else
+    vim.cmd('terminal')
+    vim.cmd('keepalt file mainterm')
+    -- Double-check the buffer was named correctly
+    local new_buf = vim.fn.bufnr("mainterm")
+    if new_buf > -1 then
+      vim.cmd('buffer ' .. new_buf)
     end
 
-    -- Ensure we're in insert mode
-    vim.cmd('startinsert')
+    print('Unable to create terminal')
+  end
+
+  -- Ensure we're in insert mode
+  vim.cmd('startinsert')
 end)
 
 -- local format = function()
@@ -84,69 +83,68 @@ end)
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    -- Mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local bufopts = { noremap = true, silent = true, buffer = bufnr }
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
-    if client.name == "eslint" then
-        -- vim.cmd.LspStop('eslint')
-        return
+  if client.name == "eslint" then
+    -- vim.cmd.LspStop('eslint')
+    return
+  end
+
+  if client.name == "tsserver" then
+    client.server_capabilities.documentFormattingProvider = false
+  end
+
+
+  local active_clients = vim.lsp.get_active_clients()
+  if client.name == 'denols' then
+    for _, client_ in pairs(active_clients) do
+      -- stop tsserver if denols is already active
+      if client_.name == 'tsserver' then
+        client_.stop()
+      end
     end
-
-    if client.name == "tsserver" then
-        client.server_capabilities.documentFormattingProvider = false
+  elseif client.name == 'tsserver' then
+    for _, client_ in pairs(active_clients) do
+      -- prevent tsserver from starting if denols is already active
+      if client_.name == 'denols' then
+        client.stop()
+      end
     end
+  end
 
-
-    local active_clients = vim.lsp.get_active_clients()
-    if client.name == 'denols' then
-        for _, client_ in pairs(active_clients) do
-            -- stop tsserver if denols is already active
-            if client_.name == 'tsserver' then
-                client_.stop()
-            end
-        end
-    elseif client.name == 'tsserver' then
-        for _, client_ in pairs(active_clients) do
-            -- prevent tsserver from starting if denols is already active
-            if client_.name == 'denols' then
-                client.stop()
-            end
-        end
-    end
-
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', '<leader>.', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-    vim.keymap.set('n', '<leader>wl', function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, bufopts)
-    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '<leader>f',
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', '<leader>.', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set('n', '<leader>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, bufopts)
+  vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', '<leader>f',
     function()
-	    if(client.server_capabilities.documentFormattingProvider) then
-		    vim.lsp.buf.format({})
-	    end
-        format()
+      if (client.server_capabilities.documentFormattingProvider) then
+        vim.lsp.buf.format({})
+      end
+      format()
     end
     , bufopts)
 
-    local navbuddy = require("nvim-navbuddy")
-    navbuddy.attach(client, bufnr)
+  local navbuddy = require("nvim-navbuddy")
+  navbuddy.attach(client, bufnr)
 
-    vim.keymap.set('n', '<leader>n', navbuddy.open)
-
+  vim.keymap.set('n', '<leader>n', navbuddy.open)
 end
 
 require("config.lazy")
@@ -157,171 +155,176 @@ local lsp = require "lspconfig"
 local coq = require "coq"
 
 vim.g.markdown_fenced_languages = {
-    "ts=typescript"
+  "ts=typescript"
 }
 
 lsp.tsserver.setup(coq.lsp_ensure_capabilities({
-    on_attach = on_attach,
-    root_dir = lsp.util.root_pattern('package.json'),
-    init_options = {
-        lint = false
-    }
+  on_attach = on_attach,
+  root_dir = function(fname)
+    if lsp.util.root_pattern('deno.json')(fname) then
+      return nil
+    end
+    return lsp.util.root_pattern('package.json', 'tsconfig.json')(fname)
+  end,
+  init_options = {
+    lint = false
+  }
 }))
 
 lsp.denols.setup(coq.lsp_ensure_capabilities({
-    on_attach = on_attach,
-    root_dir = lsp.util.root_pattern('deno.jsonc'),
-    init_options = {
-        lint = true
-    }
+  on_attach = on_attach,
+  root_dir = lsp.util.root_pattern('deno.json'),
+  init_options = {
+    lint = true
+  }
 }))
 
 lsp.intelephense.setup(coq.lsp_ensure_capabilities({
-    on_attach = on_attach,
-    init_options = {
-        lint = true
-    },
-    settings = {
-        intelephense = {
-            files = {
-                maxSize = 10000000000000
-            },
-            environment = {
-                includePaths = {
-                    "~/hs/wordpress/wordpress/",
-                    "~/hs/wordpress/plugins/"
-                }
-            }
+  on_attach = on_attach,
+  init_options = {
+    lint = true
+  },
+  settings = {
+    intelephense = {
+      files = {
+        maxSize = 10000000000000
+      },
+      environment = {
+        includePaths = {
+          "~/hs/wordpress/wordpress/",
+          "~/hs/wordpress/plugins/"
         }
+      }
     }
+  }
 }))
 
 -- lsp.biome.setup({})
 
 lsp.eslint.setup({
-    on_attach = function(client, bufnr)
-        -- vim.api.nvim_create_autocmd("BufWritePre", {
-        --     buffer = bufnr,
-        --     command = "EslintFixAll",
-        -- })
-    end,
-    settings = {
-        codeAction = {
-            disableRuleComment = {
-                enable = true,
-                location = "separateLine"
-            },
-            showDocumentation = {
-                enable = true
-            }
-        },
-        codeActionOnSave = {
-            enable = false,
-            mode = "all"
-        },
-        experimental = {
-            useFlatConfig = false
-        },
-        format = true,
-        nodePath = "",
-        onIgnoredFiles = "off",
-        problems = {
-            shortenToSingleLine = false
-        },
-        quiet = false,
-        rulesCustomizations = {},
-        run = "onType",
-        useESLintClass = false,
-        validate = "on",
-        workingDirectory = {
-            mode = "location"
-        }
+  on_attach = function(client, bufnr)
+    -- vim.api.nvim_create_autocmd("BufWritePre", {
+    --     buffer = bufnr,
+    --     command = "EslintFixAll",
+    -- })
+  end,
+  settings = {
+    codeAction = {
+      disableRuleComment = {
+        enable = true,
+        location = "separateLine"
+      },
+      showDocumentation = {
+        enable = true
+      }
+    },
+    codeActionOnSave = {
+      enable = false,
+      mode = "all"
+    },
+    experimental = {
+      useFlatConfig = false
+    },
+    format = true,
+    nodePath = "",
+    onIgnoredFiles = "off",
+    problems = {
+      shortenToSingleLine = false
+    },
+    quiet = false,
+    rulesCustomizations = {},
+    run = "onType",
+    useESLintClass = false,
+    validate = "on",
+    workingDirectory = {
+      mode = "location"
     }
+  }
 })
 
 
 
 lsp.lua_ls.setup(coq.lsp_ensure_capabilities({
-    on_attach = on_attach,
-    settings = {
-        Lua = {
-            runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = 'LuaJIT',
-            },
-            diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = { 'vim' },
-            },
-            workspace = {
-                -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file("", true),
-            },
-            -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {
-                enable = false,
-            },
-        },
+  on_attach = on_attach,
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = { 'vim' },
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
     },
+  },
 }))
 
 
 lsp.pyright.setup({
-    on_attach = on_attach
+  on_attach = on_attach
 })
 
 lsp.svelte.setup({
-    on_attach = on_attach
+  on_attach = on_attach
 })
 
 lsp.cssls.setup({
-    on_attach = on_attach
+  on_attach = on_attach
 })
 
-    -- require('eslint').setup({
-    --     bin = 'eslint_d', -- or `eslint`
-    --     cmd = 'eslint_d -f visualstudio',
-    --     root_dir = require('lspconfig').util.root_pattern('package.json'),
-    --     code_actions = {
-    --         enable = true,
-    --         apply_on_save = {
-    --             enable = true,
-    --             types = { "directive", "problem", "suggestion", "layout" },
-    --         },
-    --         disable_rule_comment = {
-    --             enable = true,
-    --             location = "separate_line", -- or `same_line`
-    --         },
-    --     },
-    --     diagnostics = {
-    --         enable = true,
-    --         report_unused_disable_directives = false,
-    --         run_on = "type", -- or `save`
-    --     },
-    --
-    -- });
+-- require('eslint').setup({
+--     bin = 'eslint_d', -- or `eslint`
+--     cmd = 'eslint_d -f visualstudio',
+--     root_dir = require('lspconfig').util.root_pattern('package.json'),
+--     code_actions = {
+--         enable = true,
+--         apply_on_save = {
+--             enable = true,
+--             types = { "directive", "problem", "suggestion", "layout" },
+--         },
+--         disable_rule_comment = {
+--             enable = true,
+--             location = "separate_line", -- or `same_line`
+--         },
+--     },
+--     diagnostics = {
+--         enable = true,
+--         report_unused_disable_directives = false,
+--         run_on = "type", -- or `save`
+--     },
+--
+-- });
 
 
-    local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
-    local event = "BufWritePre" -- or "BufWritePost"
-    local async = event == "BufWritePost"
+local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
+local event = "BufWritePre" -- or "BufWritePost"
+local async = event == "BufWritePost"
 
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 lsp.emmet_ls.setup({
-    -- on_attach = on_attach,
-    capabilities = capabilities,
-    filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue" },
-    init_options = {
-      html = {
-        options = {
-          -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
-          ["bem.enabled"] = true,
-        },
+  -- on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue" },
+  init_options = {
+    html = {
+      options = {
+        -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+        ["bem.enabled"] = true,
       },
-    }
+    },
+  }
 })
 
 -- lsp.mdx_analyzer.setup({});
@@ -331,7 +334,7 @@ require('colors')
 
 
 require('lint').linters_by_ft = {
-  markdown = {'vale',},
+  markdown = { 'vale', },
   -- javascript = {'eslint_d'}
 }
 
@@ -343,10 +346,10 @@ require('lint').linters_by_ft = {
 
 
 vim.api.nvim_create_autocmd({ 'TermOpen' }, {
-    pattern = { "term://*" },
-    callback = function()
-        print('terminal mode engaged');
-    end
+  pattern = { "term://*" },
+  callback = function()
+    print('terminal mode engaged');
+  end
 })
 
 -- Copilot --
@@ -375,15 +378,12 @@ vim.api.nvim_create_user_command('W', ':w', {})
 vim.api.nvim_create_user_command('Wq', ':wq', {})
 
 local abbrevs = {
-    boid = 'void',
-    josn = 'json'
+  boid = 'void',
+  josn = 'json'
 }
 
 for typo, replacement in pairs(abbrevs) do
-    vim.cmd(':iabbrev ' .. typo .. ' ' .. replacement)
-    -- TODO: use this when it's released
-    -- vim.keymap.set('!a', typo, replacement);
+  vim.cmd(':iabbrev ' .. typo .. ' ' .. replacement)
+  -- TODO: use this when it's released
+  -- vim.keymap.set('!a', typo, replacement);
 end
-
-
-

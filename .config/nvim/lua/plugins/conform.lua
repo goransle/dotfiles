@@ -21,7 +21,7 @@ return {
     formatters_by_ft = {
       lua = { "lua_ls" },
       python = { "isort", "black" },
-      javascript = { "eslint_d", "prettierd", "prettier", stop_after_first = true },
+      javascript = { "deno_fmt", "eslint_d", "prettierd", "prettier", stop_after_first = true },
     },
     -- Set default options
     default_format_opts = {
@@ -34,11 +34,16 @@ return {
       shfmt = {
         prepend_args = { "-i", "2" },
       },
+      deno_fmt = {
+        condition = function()
+          return vim.fn.filereadable("deno.json") == 1 or vim.fn.filereadable("deno.jsonc") == 1
+        end,
+      },
       eslint_d = {
         condition = function()
           return vim.fn.filereadable(".eslintrc") == 1 or vim.fn.filereadable(".eslintrc.js") == 1 or
-          vim.fn.filereadable(".eslintrc.json") == 1 or vim.fn.filereadable(".eslintrc.yaml") == 1 or
-          vim.fn.filereadable(".eslintrc.yml") == 1
+              vim.fn.filereadable(".eslintrc.json") == 1 or vim.fn.filereadable(".eslintrc.yaml") == 1 or
+              vim.fn.filereadable(".eslintrc.yml") == 1
         end,
       },
     },
