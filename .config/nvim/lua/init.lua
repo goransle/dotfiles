@@ -46,6 +46,8 @@ vim.keymap.set("n", "Q", "<nop>")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
+vim.keymap.set("n", "<F5>", ":Explore<CR>", { noremap = true, silent = true })
+
 
 vim.keymap.set("n", "<C-'>", function()
   local existing = vim.fn.bufnr("mainterm")
@@ -158,7 +160,7 @@ vim.g.markdown_fenced_languages = {
   "ts=typescript"
 }
 
-lsp.tsserver.setup(coq.lsp_ensure_capabilities({
+lsp.ts_ls.setup(coq.lsp_ensure_capabilities({
   on_attach = on_attach,
   root_dir = function(fname)
     if lsp.util.root_pattern('deno.json')(fname) then
@@ -170,180 +172,122 @@ lsp.tsserver.setup(coq.lsp_ensure_capabilities({
     lint = false
   }
 }))
-
-lsp.denols.setup(coq.lsp_ensure_capabilities({
-  on_attach = on_attach,
-  root_dir = lsp.util.root_pattern('deno.json'),
-  init_options = {
-    lint = true
-  }
-}))
-
-lsp.intelephense.setup(coq.lsp_ensure_capabilities({
-  on_attach = on_attach,
-  init_options = {
-    lint = true
-  },
-  settings = {
-    intelephense = {
-      files = {
-        maxSize = 10000000000000
-      },
-      environment = {
-        includePaths = {
-          "~/hs/wordpress/wordpress/",
-          "~/hs/wordpress/plugins/"
-        }
-      }
-    }
-  }
-}))
-
--- lsp.biome.setup({})
-
-lsp.eslint.setup({
-  on_attach = function(client, bufnr)
-    -- vim.api.nvim_create_autocmd("BufWritePre", {
-    --     buffer = bufnr,
-    --     command = "EslintFixAll",
-    -- })
-  end,
-  settings = {
-    codeAction = {
-      disableRuleComment = {
-        enable = true,
-        location = "separateLine"
-      },
-      showDocumentation = {
-        enable = true
-      }
-    },
-    codeActionOnSave = {
-      enable = false,
-      mode = "all"
-    },
-    experimental = {
-      useFlatConfig = false
-    },
-    format = true,
-    nodePath = "",
-    onIgnoredFiles = "off",
-    problems = {
-      shortenToSingleLine = false
-    },
-    quiet = false,
-    rulesCustomizations = {},
-    run = "onType",
-    useESLintClass = false,
-    validate = "on",
-    workingDirectory = {
-      mode = "location"
-    }
-  }
-})
-
-
-
-lsp.lua_ls.setup(coq.lsp_ensure_capabilities({
-  on_attach = on_attach,
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
-}))
-
-
-lsp.pyright.setup({
-  on_attach = on_attach
-})
-
-lsp.svelte.setup({
-  on_attach = on_attach
-})
-
-lsp.cssls.setup({
-  on_attach = on_attach
-})
-
--- require('eslint').setup({
---     bin = 'eslint_d', -- or `eslint`
---     cmd = 'eslint_d -f visualstudio',
---     root_dir = require('lspconfig').util.root_pattern('package.json'),
---     code_actions = {
---         enable = true,
---         apply_on_save = {
---             enable = true,
---             types = { "directive", "problem", "suggestion", "layout" },
---         },
---         disable_rule_comment = {
---             enable = true,
---             location = "separate_line", -- or `same_line`
---         },
---     },
---     diagnostics = {
---         enable = true,
---         report_unused_disable_directives = false,
---         run_on = "type", -- or `save`
---     },
 --
--- });
-
-
-local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
-local event = "BufWritePre" -- or "BufWritePost"
-local async = event == "BufWritePost"
-
+-- lsp.denols.setup(coq.lsp_ensure_capabilities({
+--   on_attach = on_attach,
+--   root_dir = lsp.util.root_pattern('deno.json'),
+--   init_options = {
+--     lint = true
+--   }
+-- }))
+--
+-- lsp.intelephense.setup(coq.lsp_ensure_capabilities({
+--   on_attach = on_attach,
+--   init_options = {
+--     lint = true
+--   },
+--   settings = {
+--     intelephense = {
+--       files = {
+--         maxSize = 10000000000000
+--       },
+--       environment = {
+--         includePaths = {
+--           "~/hs/wordpress/wordpress/",
+--           "~/hs/wordpress/plugins/"
+--         }
+--       }
+--     }
+--   }
+-- }))
+--
+-- lsp.biome.setup({})
+--
+-- lsp.eslint.setup({
+--   on_attach = function(client, bufnr)
+--     -- vim.api.nvim_create_autocmd("BufWritePre", {
+--     --     buffer = bufnr,
+--     --     command = "EslintFixAll",
+--     -- })
+--   end,
+--   settings = {
+--     codeAction = {
+--       disableRuleComment = {
+--         enable = true,
+--         location = "separateLine"
+--       },
+--       showDocumentation = {
+--         enable = true
+--       }
+--     },
+--     codeActionOnSave = {
+--       enable = false,
+--       mode = "all"
+--     },
+--     experimental = {
+--       useFlatConfig = false
+--     },
+--     format = true,
+--     nodePath = "",
+--     onIgnoredFiles = "off",
+--     problems = {
+--       shortenToSingleLine = false
+--     },
+--     quiet = false,
+--     rulesCustomizations = {},
+--     run = "onType",
+--     useESLintClass = false,
+--     validate = "on",
+--     workingDirectory = {
+--       mode = "location"
+--     }
+--   }
+-- })
+--
+--
+--
+-- lsp.lua_ls.setup(coq.lsp_ensure_capabilities({
+--   on_attach = on_attach,
+--   settings = {
+--     Lua = {
+--       runtime = {
+--         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+--         version = 'LuaJIT',
+--       },
+--       diagnostics = {
+--         -- Get the language server to recognize the `vim` global
+--         globals = { 'vim' },
+--       },
+--       workspace = {
+--         -- Make the server aware of Neovim runtime files
+--         library = vim.api.nvim_get_runtime_file("", true),
+--       },
+--       -- Do not send telemetry data containing a randomized but unique identifier
+--       telemetry = {
+--         enable = false,
+--       },
+--     },
+--   },
+-- }))
+--
+--
+-- lsp.cssls.setup({
+--   on_attach = on_attach
+-- })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-lsp.emmet_ls.setup({
-  -- on_attach = on_attach,
-  capabilities = capabilities,
-  filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue" },
-  init_options = {
-    html = {
-      options = {
-        -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
-        ["bem.enabled"] = true,
-      },
-    },
-  }
-})
-
--- lsp.mdx_analyzer.setup({});
-
+-- lsp.mdx_analyzer.setup({
+--   filetypes = { "markdown.mdx" },
+-- });
 
 require('colors')
-
 
 require('lint').linters_by_ft = {
   markdown = { 'vale', },
   -- javascript = {'eslint_d'}
 }
-
--- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
---   callback = function()
---     require('lint').try_lint()
---   end,
--- })
-
 
 vim.api.nvim_create_autocmd({ 'TermOpen' }, {
   pattern = { "term://*" },
@@ -351,27 +295,6 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
     print('terminal mode engaged');
   end
 })
-
--- Copilot --
--- vim.g.copilot_enabled = false;
---
--- vim.keymap.set('n', '<leader>co', function()
---     vim.g.copilot_enabled = not vim.g.copilot_enabled;
---
---     print('Copilot is now ' .. (vim.g.copilot_enabled and 'enabled' or 'disabled') .. '');
--- end, { silent = true })
---
--- vim.keymap.set('n', '<leader>cop', ':Copilot<CR>', { silent = true });
--- vim.keymap.set('i', '<c-l>', 'copilot#Accept()', { silent = true, expr = true, replace_keycodes = false })
--- vim.keymap.set('i', '<C-j>', 'copilot#Next()', { silent = true, expr = true })
--- vim.keymap.set('i', '<C-k>', 'copilot#Previous()', { silent = true, expr = true })
---
-
--- Tabby --
-
-vim.g.tabby_keybinding_accept = '<C-l>'
-vim.g.tabby_keybinding_trigger_or_dismiss = '<C-j>'
-
 
 -- productivity +++
 vim.api.nvim_create_user_command('W', ':w', {})
