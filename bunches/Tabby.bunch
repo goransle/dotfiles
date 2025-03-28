@@ -1,1 +1,1 @@
-$tabby serve --device metal --model CodeLlama-13B --port 1337
+$tabby serve --device metal --model Qwen2.5-Coder-14B --chat-model Mistral-7B --port 1337

@@ -1,12 +1,11 @@
-$ (defaultbrowser chrome &> /dev/null && ~/bunches/confirm-dialog &> /dev/null) || exit 0
-
-Google Chrome
-
+(dnd)
 Amethyst
+
 Tidsbanken ~5
-Google Kalender ~5
+ChatGPT ~10
 
 Work-comms.bunch
 Tabby.bunch
 
-!$ (defaultbrowser firefox &> /dev/null && ~/bunches/confirm-dialog &> /dev/null) || exit 0 
+%Ghostty
+- {@t "nvim ~/notes/next.md" return}

@@ -23,9 +23,13 @@ if status is-interactive
     alias gr="git restore"
     alias grs="git restore --staged"
 
+    alias docker="podman"
+
+    alias zen="/Applications/Zen\ Browser.app/Contents/MacOS/zen"
+
     zoxide init --cmd cd fish | source
 
-    nvm use -s # adds the node bins to path using the closest .nvmrc
+    nvm use -s
 end
 
 # pnpm
@@ -34,3 +38,8 @@ if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end
+
+# Generated for envman. Do not edit.
+test -s ~/.config/envman/load.fish; and source ~/.config/envman/load.fish
+
+alias sqlite=/opt/homebrew/opt/sqlite3/bin/sqlite3
