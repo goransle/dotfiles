@@ -8,3 +8,7 @@ lua require('init')
 :tnoremap <Esc><Esc> <C-\><C-n>
 :tnoremap <leader><Esc> <C-\><C-n>
 :tnoremap <C-'> <C-\><C-n>
+
+
+let g:opamshare = substitute(system('opam var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"

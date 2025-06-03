@@ -102,7 +102,7 @@ local on_attach = function(client, bufnr)
   end
 
 
-  local active_clients = vim.lsp.get_active_clients()
+  local active_clients = vim.lsp.get_clients()
   if client.name == 'denols' then
     for _, client_ in pairs(active_clients) do
       -- stop tsserver if denols is already active
@@ -134,14 +134,14 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<leader>f',
-    function()
-      if (client.server_capabilities.documentFormattingProvider) then
-        vim.lsp.buf.format({})
-      end
-      format()
-    end
-    , bufopts)
+  -- vim.keymap.set('n', '<leader>f',
+  --   function()
+  --     if (client.server_capabilities.documentFormattingProvider) then
+  --       vim.lsp.buf.format({})
+  --     end
+  --     format()
+  --   end
+  --   , bufopts)
 
   local navbuddy = require("nvim-navbuddy")
   navbuddy.attach(client, bufnr)
@@ -172,6 +172,11 @@ lsp.ts_ls.setup(coq.lsp_ensure_capabilities({
     lint = false
   }
 }))
+
+lsp.ocamllsp.setup({
+	on_attach = on_attach,
+})
+
 --
 -- lsp.denols.setup(coq.lsp_ensure_capabilities({
 --   on_attach = on_attach,
