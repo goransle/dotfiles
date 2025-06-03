@@ -46,6 +46,6 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3dwhite
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/Users/goranslettemark/\x2ecargo/bin\x1e/usr/local/bin\x1e/Applications\x1e/Applications/love\x2eapp\x1e/Users/goranslettemark/\x2ecomposer\x1e/Users/goranslettemark/\x2eebcli\x2dvirtual\x2denv/executables\x1e/Users/goranslettemark/Library/Python/3\x2e9/bin\x1e/Users/goranslettemark/\x2edeno/bin\x1e/opt/homebrew/bin\x1e/opt/homebrew/opt/fzf/bin
+SETUVAR fish_user_paths:/Users/goranslettemark/\x2ecodeium/windsurf/bin\x1e/Users/goranslettemark/\x2ecargo/bin\x1e/usr/local/bin\x1e/Applications\x1e/Applications/love\x2eapp\x1e/Users/goranslettemark/\x2ecomposer\x1e/Users/goranslettemark/\x2eebcli\x2dvirtual\x2denv/executables\x1e/Users/goranslettemark/Library/Python/3\x2e9/bin\x1e/Users/goranslettemark/\x2edeno/bin\x1e/opt/homebrew/bin\x1e/opt/homebrew/opt/fzf/bin
 SETUVAR nvm_data:/Users/goranslettemark/\x2elocal/share/nvm
 SETUVAR nvm_mirror:https\x3a//nodejs\x2eorg/dist

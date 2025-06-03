@@ -1,4 +1,6 @@
 (dnd)
+$ (defaultbrowser firefoxdeveloperedition &> /dev/null && ~/bunches/confirm-dialog &> /dev/null) || exit 0
+
 Amethyst
 
 Tidsbanken ~5
@@ -9,3 +11,6 @@ Tabby.bunch
 
 %Ghostty
 - {@t "nvim ~/notes/next.md" return}
+
+
+!$ (defaultbrowser firefox &> /dev/null && ~/bunches/confirm-dialog &> /dev/null) || exit 0

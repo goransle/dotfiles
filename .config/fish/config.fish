@@ -43,3 +43,8 @@ end
 test -s ~/.config/envman/load.fish; and source ~/.config/envman/load.fish
 
 alias sqlite=/opt/homebrew/opt/sqlite3/bin/sqlite3
+
+eval (opam env)
+
+# Added by Windsurf
+fish_add_path /Users/goranslettemark/.codeium/windsurf/bin
