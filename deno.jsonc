@@ -1,13 +1,11 @@
 {
   "compilerOptions": {
-    "allowJs": true,
     "lib": ["deno.window"],
     "strict": true
   },
   "lint": {
     "files": {
-      "include": ["src/"],
-      "exclude": ["src/testdata/"]
+      "include": ["./"]
     },
     "rules": {
       "tags": ["recommended"],
@@ -17,8 +15,7 @@
   },
   "fmt": {
     "files": {
-      "include": ["src/"],
-      "exclude": ["src/testdata/"]
+      "include": ["./"]
     },
     "options": {
       "useTabs": true,
@@ -30,8 +27,7 @@
   },
   "test": {
     "files": {
-      "include": ["src/"],
-      "exclude": ["src/testdata/"]
+      "include": ["./"]
     }
   }
 }
